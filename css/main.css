@@ -20,10 +20,10 @@
   --btn-default-hover-bg: #222;
   --btn-default-hover-color: #fff;
   --btn-default-hover-border-color: #222;
-  --highlight-background: #f3f3f3;
-  --highlight-foreground: #444;
-  --highlight-gutter-background: #e1e1e1;
-  --highlight-gutter-foreground: #555;
+  --highlight-background: #fff;
+  --highlight-foreground: #24292e;
+  --highlight-gutter-background: #e9e9ea;
+  --highlight-gutter-foreground: #393e42;
   color-scheme: light;
 }
 html {
@@ -374,113 +374,143 @@ code.hljs {
   padding: 3px 5px
 }
 /*!
-  Theme: Default
-  Description: Original highlight.js style
-  Author: (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
-  Maintainer: @highlightjs/core-team
-  Website: https://highlightjs.org/
-  License: see project LICENSE
-  Touched: 2021
-*/
-/*
-This is left on purpose making default.css the single file that can be lifted
-as-is from the repository directly without the need for a build step
+  Theme: GitHub
+  Description: Light theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
 
-Typically this "required" baseline CSS is added by `makestuff.js` during build.
+  Outdated base version: https://github.com/primer/github-syntax-light
+  Current colors taken from GitHub's CSS
 */
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
-/* end baseline CSS */
 .hljs {
-  background: #F3F3F3;
-  color: #444
+  color: #24292e;
+  background: #ffffff
 }
-/* Base color: saturation 0; */
-.hljs-subst {
-  /* default */
-  
-}
-/* purposely ignored */
-.hljs-formula,
-.hljs-attr,
-.hljs-property,
-.hljs-params {
-  
-}
-.hljs-comment {
-  color: #697070
-}
-.hljs-tag,
-.hljs-punctuation {
-  color: #444a
-}
-.hljs-tag .hljs-name,
-.hljs-tag .hljs-attr {
-  color: #444
-}
-.hljs-keyword,
-.hljs-attribute,
-.hljs-selector-tag,
-.hljs-meta .hljs-keyword,
 .hljs-doctag,
-.hljs-name {
-  font-weight: bold
-}
-/* User color: hue: 0 */
-.hljs-type,
-.hljs-string,
-.hljs-number,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-quote,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
 .hljs-template-tag,
-.hljs-deletion {
-  color: #880000
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  /* prettylights-syntax-keyword */
+  color: #d73a49
 }
 .hljs-title,
-.hljs-section {
-  color: #880000;
-  font-weight: bold
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  /* prettylights-syntax-entity */
+  color: #6f42c1
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  /* prettylights-syntax-constant */
+  color: #005cc5
 }
 .hljs-regexp,
-.hljs-symbol,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link,
-.hljs-selector-attr,
-.hljs-operator,
-.hljs-selector-pseudo {
-  color: #ab5656
-}
-/* Language color: hue: 90; */
-.hljs-literal {
-  color: #695
+.hljs-string,
+.hljs-meta .hljs-string {
+  /* prettylights-syntax-string */
+  color: #032f62
 }
 .hljs-built_in,
-.hljs-bullet,
+.hljs-symbol {
+  /* prettylights-syntax-variable */
+  color: #e36209
+}
+.hljs-comment,
 .hljs-code,
-.hljs-addition {
-  color: #397300
+.hljs-formula {
+  /* prettylights-syntax-comment */
+  color: #6a737d
 }
-/* Meta color: hue: 200 */
-.hljs-meta {
-  color: #1f7199
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  /* prettylights-syntax-entity-tag */
+  color: #22863a
 }
-.hljs-meta .hljs-string {
-  color: #38a
+.hljs-subst {
+  /* prettylights-syntax-storage-modifier-import */
+  color: #24292e
 }
-/* Misc effects */
+.hljs-section {
+  /* prettylights-syntax-markup-heading */
+  color: #005cc5;
+  font-weight: bold
+}
+.hljs-bullet {
+  /* prettylights-syntax-markup-list */
+  color: #735c0f
+}
 .hljs-emphasis {
+  /* prettylights-syntax-markup-italic */
+  color: #24292e;
   font-style: italic
 }
 .hljs-strong {
+  /* prettylights-syntax-markup-bold */
+  color: #24292e;
   font-weight: bold
+}
+.hljs-addition {
+  /* prettylights-syntax-markup-inserted */
+  color: #22863a;
+  background-color: #f0fff4
+}
+.hljs-deletion {
+  /* prettylights-syntax-markup-deleted */
+  color: #b31d28;
+  background-color: #ffeef0
+}
+.hljs-char.escape_,
+.hljs-link,
+.hljs-params,
+.hljs-property,
+.hljs-punctuation,
+.hljs-tag {
+  /* purposely ignored */
+  
+}
+.highlight:hover .copy-btn,
+.code-container:hover .copy-btn {
+  opacity: 1;
+}
+.code-container {
+  position: relative;
+}
+.code-lang {
+  font-size: 40px;
+  line-height: 1;
+  opacity: 0.1;
+  pointer-events: none;
+  position: absolute;
+  right: 5px;
+}
+.copy-btn {
+  color: #333;
+  cursor: pointer;
+  line-height: 1.6;
+  opacity: 0;
+  padding: 2px 6px;
+  position: absolute;
+  transition: opacity 0.2s ease-in-out;
+  background: #fff;
+  border: 0;
+  font-size: 0.8125em;
+  right: 0;
+  top: 0;
 }
 code,
 kbd,
@@ -1182,6 +1212,43 @@ pre code {
 .use-motion .menu-item {
   visibility: hidden;
 }
+.github-corner :hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+.github-corner svg {
+  color: #fff;
+  fill: var(--theme-color);
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 5;
+}
+@media (max-width: 991px) {
+  .github-corner {
+    display: none;
+  }
+  .github-corner svg {
+    color: var(--theme-color);
+    fill: #fff;
+  }
+  .github-corner .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+@keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(-25deg);
+  }
+  40%, 80% {
+    transform: rotate(10deg);
+  }
+}
 @media (max-width: 991px) {
   .sidebar {
     left: -320px;
@@ -1221,7 +1288,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ffafff;
+    background: #fff1ee;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1471,6 +1538,7 @@ pre code {
   border: 1px solid #eee;
   max-width: 120px;
   padding: 2px;
+  border-radius: 50%;
 }
 .site-author-name {
   color: var(--text-color);
@@ -1525,9 +1593,6 @@ pre code {
 }
 .links-of-author a {
   font-size: 0.8125em;
-}
-.links-of-author i[class^='fa'] {
-  margin-right: 2px;
 }
 .cc-license .cc-opacity {
   border-bottom: 0;
@@ -1624,9 +1689,15 @@ pre code {
   width: 100%;
 }
 .with-love {
-  color: #f00;
+  color: #999;
   display: inline-block;
   margin: 0 5px;
+}
+.busuanzi-count #busuanzi_container_site_uv {
+  display: none;
+}
+.busuanzi-count #busuanzi_container_site_pv {
+  display: none;
 }
 @keyframes icon-animate {
   0%, 100% {
@@ -1660,7 +1731,6 @@ pre code {
 }
 .back-to-top span {
   margin-right: 8px;
-  display: none;
 }
 .back-to-top .fa {
   text-align: center;
@@ -2052,6 +2122,9 @@ pre code {
   flex-basis: 100%;
   height: 0;
 }
+#busuanzi_container_page_pv {
+  display: none;
+}
 .post-nav {
   border-top: 1px solid #eee;
   display: flex;
@@ -2354,6 +2427,107 @@ ul.breadcrumb li:last-child {
   border-bottom-color: #111;
   color: #111;
 }
+.search-active {
+  overflow: hidden;
+  margin-right: var(--dialog-scrollgutter, 0);
+}
+.search-pop-overlay {
+  background: rgba(0,0,0,0);
+  display: flex;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: visibility 0.4s, background 0.4s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 40;
+}
+.search-active .search-pop-overlay {
+  background: rgba(0,0,0,0.3);
+  visibility: visible;
+}
+.search-popup {
+  background: var(--card-bg-color);
+  border-radius: 5px;
+  height: 80%;
+  margin: auto;
+  transform: scale(0);
+  transition: transform 0.4s;
+  width: 700px;
+}
+.search-active .search-popup {
+  transform: scale(1);
+}
+@media (max-width: 767px) {
+  .search-popup {
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+.search-popup .search-icon,
+.search-popup .popup-btn-close {
+  color: #999;
+  font-size: 18px;
+  padding: 0 10px;
+}
+.search-popup .popup-btn-close {
+  cursor: pointer;
+}
+.search-popup .popup-btn-close:hover .fa {
+  color: #222;
+}
+.search-popup .search-header {
+  background: #eee;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  padding: 5px;
+}
+.search-popup input.search-input {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  width: 100%;
+}
+.search-popup input.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+.search-popup .search-result-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 55px);
+  overflow: auto;
+  padding: 5px 25px;
+}
+.search-popup .search-result-container hr {
+  flex-shrink: 0;
+  margin: 5px 0 10px;
+}
+.search-popup .search-result-container hr:first-child {
+  display: none;
+}
+.search-popup .search-result-list {
+  margin: 0 5px;
+  padding: 0;
+}
+.search-popup a.search-result-title {
+  font-weight: bold;
+}
+.search-popup p.search-result {
+  border-bottom: 1px dashed #ccc;
+  margin: 0 0 10px;
+  padding: 5px 0;
+}
+.search-popup .search-input-container {
+  flex-grow: 1;
+  padding: 2px;
+}
+.search-popup .search-result-icon {
+  color: #ccc;
+  margin: auto;
+}
 mark.search-keyword {
   background: transparent;
   border-bottom: 1px dashed #ff2a2a;
@@ -2574,7 +2748,6 @@ header.header {
   }
   .links-of-author-item {
     margin: 5px 0 0;
-    width: 50%;
   }
   .links-of-author-item a {
     border-bottom: 0;
@@ -2689,4 +2862,112 @@ header.header {
   .comments {
     padding: 10px 12px;
   }
+}
+/* mkmt 折叠框基础样式 */
+details.mkmt {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin: 1em 0;
+  background: #fff;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+details.mkmt > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.6em 1em;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  color: inherit;
+}
+details.mkmt > summary::after {
+  content: ">";
+  position: absolute;
+  right: 1em;
+  transition: transform 0.2s ease;
+}
+details.mkmt[open] > summary::after {
+  transform: rotate(90deg);
+}
+details.mkmt > *:not(summary) {
+  margin: 0;
+  padding: 0.6em 0.8em;
+}
+/* 图标伪元素基础 */
+details.mkmt > summary::before {
+  content: '';
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.4em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+details.mkmt.mt-note > summary::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23588bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='8'/><line x1='12' y1='12' x2='12' y2='16'/></svg>");
+}
+details.mkmt.mt-note {
+  border: 1.5px solid #588bff;
+  background: #fff;
+}
+details.mkmt.mt-note > summary {
+  background: #eef3ff;
+  color: #588bff;
+}
+details.mkmt.mt-warning > summary::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23f69202' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'><path d='M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/><line x1='12' y1='9' x2='12' y2='13'/><line x1='12' y1='17' x2='12.01' y2='17'/></svg>");
+}
+details.mkmt.mt-warning {
+  border: 1.5px solid #f69202;
+  background: #fff;
+}
+details.mkmt.mt-warning > summary {
+  background: #fef4e5;
+  color: #f69202;
+}
+details.mkmt.mt-danger > summary::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23f45555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg>");
+}
+details.mkmt.mt-danger {
+  border: 1.5px solid #f45555;
+  background: #fff;
+}
+details.mkmt.mt-danger > summary {
+  background: #feeeee;
+  color: #f45555;
+}
+pre {
+  margin: 0;
+}
+details.mkmt.mt-code > summary::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%237f50ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'><path d='M7 8L3 12L7 16'/> <path d='M17 16L21 12L17 8'/> <path d='M9 19.5L14.5 5'/></svg>");
+}
+details.mkmt.mt-code {
+  border: 1.5px solid #7f50ff;
+  background: #fff;
+}
+details.mkmt.mt-code > summary {
+  background: #f2edff;
+  color: #7f50ff;
+}
+.rbcode {
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  margin: 1em 0;
+  padding: 0.2em 0.6em;
+  background: #fff;
+}
+/* 修改鼠标选中内容的背景色和字体颜色 */
+::selection {
+  background-color: #edf3ff;
+  color: #555;
+}
+/* 针对 Firefox */
+::-moz-selection {
+  background-color: #edf3ff;
+  color: #555;
 }
