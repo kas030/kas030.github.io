@@ -138,13 +138,13 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <p>结果发现使用 <code>std::ranges::sort(v)</code> 报错。查了 cppreference 发现 <code>std::ranges::sort</code> 要求比 <code>std::sort</code> 更加严格。</p>
 <p><code>std::ranges::sort</code> 要求迭代器满足 <code>std::sortable</code> 概念，尝试添加了代码：</p>
 <div class="rbcode">
-<pre><code class="highlight cpp"><span class="built_in">static_assert</span>(std::sortable&lt;std::vector&lt;info&gt;::iterator&gt;);</code></pre>
+<pre><code class="highlight cpp"><span class="built_in">static_assert</span>(std::sortable&lt;std::vector&lt;info&gt;::iterator&gt;); <span class="comment">//失败</span></code></pre>
 </div>
 <p>发现确实发生了静态断言失败。</p>
+<p>继续查 cppreference，发现 <code>std::sortable</code> 概念由 <code>std::permutable</code> 和 <code>std::indirect_strict_weak_order</code> 组成，填入相关参数使用静态断言尝试了一下，发现前者成功，后者失败，这就很奇怪了，这个关系明明是满足严格弱序的。</p>
 <div class="rbcode">
 <pre><code class="highlight cpp"><span class="built_in">static_assert</span>(indirect_strict_weak_order&lt;ranges::less, vector&lt;info&gt;::iterator&gt;); <span class="comment">//失败</span></code></pre>
 </div>
-<p>继续查 cppreference，发现 <code>std::sortable</code> 概念由 <code>std::permutable</code> 和 <code>std::indirect_strict_weak_order</code> 组成，填入相关参数使用静态断言尝试了一下，发现前者成功，后者失败，这就很奇怪了，这个关系明明是满足严格弱序的。</p>
 <p>又研究了很久，发现只要把 <code>ranges::less</code> 改为 <code>std::less</code> 就成功了……？再次查 cppreference，在 <code>ranges::less</code> 的 Notes 部分找到了这样了描述：</p>
 <blockquote>
 <p>Unlike std::less, std::ranges::less requires all six comparison operators &lt;, &lt;=, &gt;, &gt;=, == and != to be valid (via the totally_ordered_with constraint).</p>
