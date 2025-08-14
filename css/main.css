@@ -1288,7 +1288,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #3cfabe;
+    background: #ff50e7;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2972,7 +2972,7 @@ details.mkmt.mt-code > summary {
   color: #555;
 }
 code:not(pre code) {
-  background: #ecf0f4;
+  background: #e8f2fa;
   color: #2c6ebc;
   white-space: normal;
   overflow-wrap: break-word;
@@ -2981,8 +2981,8 @@ code:not(pre code) {
 blockquote {
   margin: 2rem 0 2rem 0;
   padding: 0.8em 0.8rem;
-  border-inline-start: 0.5rem solid #377cd0;
-  background-color: #dee9f7;
+  border-inline-start: 0.5rem solid #74afe0;
+  background-color: #e8f2fa;
   border-radius: 0 0.25rem 0.25rem 0;
   border-radius: 0.2rem;
   outline: 1px solid transparent;
