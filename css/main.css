@@ -1288,7 +1288,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #4a08ff;
+    background: #39ffff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1509,20 +1509,6 @@ pre code {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.post-toc .nav .nav-child {
-  --height: 0;
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition-property: height, opacity, visibility;
-  transition: 0.2s ease-in-out;
-  visibility: hidden;
-}
-.post-toc .nav .active > .nav-child {
-  height: var(--height, auto);
-  opacity: 1;
-  visibility: unset;
 }
 .post-toc .nav .active > a {
   border-bottom-color: #fc6423;
@@ -2963,12 +2949,12 @@ details.mkmt.mt-code > summary {
 }
 /* 修改鼠标选中内容的背景色和字体颜色 */
 ::selection {
-  background-color: #edf3ff;
+  background-color: #c8c8c8;
   color: #555;
 }
 /* 针对 Firefox */
 ::-moz-selection {
-  background-color: #edf3ff;
+  background-color: #c8c8c8;
   color: #555;
 }
 code:not(pre code) {
@@ -2986,4 +2972,20 @@ blockquote {
   border-radius: 0 0.25rem 0.25rem 0;
   border-radius: 0.2rem;
   outline: 1px solid transparent;
+}
+/* 表格样式 */
+table,
+th,
+td {
+  border-collapse: collapse;
+  border: 1.5px solid #ddd;
+}
+table tr:nth-child(even) {
+  background: #fff;
+}
+table tr:nth-child(odd) {
+  background: #fff;
+}
+table tr:hover {
+  background: #fff;
 }
