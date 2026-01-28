@@ -124,7 +124,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
     <span class="keyword">return</span> <span class="number">0</span>;
 &#125;</code></pre>
 </details>
-<h1 id="语法踩坑"><a class="markdownIt-Anchor" href="#语法踩坑"></a> 语法踩坑</h1>
+<h1 id="语法踩坑记录"><a class="markdownIt-Anchor" href="#语法踩坑记录"></a> 语法踩坑记录</h1>
 <p>最开始写的结构体为：</p>
 <div class="rbcode">
 <pre><code class="highlight cpp"><span class="keyword">struct</span> <span class="title class_">info</span> &#123;
@@ -145,7 +145,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <div class="rbcode">
 <pre><code class="highlight cpp"><span class="built_in">static_assert</span>(indirect_strict_weak_order&lt;ranges::less, vector&lt;info&gt;::iterator&gt;); <span class="comment">//失败</span></code></pre>
 </div>
-<p>又研究了很久，发现只要把 <code>ranges::less</code> 改为 <code>std::less</code> 就成功了……？再次查 cppreference，在 <code>ranges::less</code> 的 Notes 部分找到了这样了描述：</p>
+<p>又研究了很久，发现只要把 <code>ranges::less</code> 改为 <code>std::less</code> 就成功了……？再次查 cppreference，在 <code>ranges::less</code> 的 Notes 部分找到了这样的描述：</p>
 <blockquote>
 <p>Unlike std::less, std::ranges::less requires all six comparison operators &lt;, &lt;=, &gt;, &gt;=, == and != to be valid (via the totally_ordered_with constraint).</p>
 </blockquote>
@@ -182,7 +182,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <span id="more"></span>
 <h1 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h1>
 <p>第一行为一个整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mtext> </mtext><mo stretchy="false">(</mo><mn>1</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>4</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">t\ (1 \le t \le 10^4)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mspace"> </span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，表示数据的组数。</p>
-<p>每组数据为一行两个整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mtext> </mtext><mo stretchy="false">(</mo><mn>1</mn><mo>≤</mo><mi>n</mi><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo separator="true">,</mo><mn>1</mn><mo>≤</mo><mi>m</mi><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>1</mn></msup><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">m \ (1 \le n \le 10^6, 1 \le m \le 10^12)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mspace"> </span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mclose">)</span></span></span></span>。</p>
+<p>每组数据为一行两个整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mtext> </mtext><mo stretchy="false">(</mo><mn>1</mn><mo>≤</mo><mi>n</mi><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo separator="true">,</mo><mn>1</mn><mo>≤</mo><mi>m</mi><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>12</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">m \ (1 \le n \le 10^6, 1 \le m \le 10^{12})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mspace"> </span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。</p>
 <p>保证所有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 之和不超过 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">10^6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span>。</p>
 <h1 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h1>
 <p>对于每组数据，第一行输出一个整数，表示树根。</p>
@@ -589,6 +589,920 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
       <tags>
         <tag>Hexo</tag>
         <tag>Stylus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java基础</title>
+    <url>/2026/01/28/Java%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="java基础知识"><a class="markdownIt-Anchor" href="#java基础知识"></a> Java基础知识</h1>
+<h2 id="jre-和-jdk"><a class="markdownIt-Anchor" href="#jre-和-jdk"></a> JRE 和 JDK</h2>
+<p>关系：</p>
+<svg width="450" height="300" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" id="svg_32">
+   <path stroke="#000000" id="svg_20" d="m225.00001,268.21242c-97.51381,0 -176.49999,-52.90169 -176.49999,-118.21242c0,-65.31073 78.98618,-118.21242 176.49999,-118.21242c97.51381,0 176.49999,52.90169 176.49999,118.21242c0,65.31073 -78.98618,118.21242 -176.49999,118.21242z" opacity="undefined" fill="none"/>
+   <ellipse stroke="#000000" ry="78.26252" rx="104.78663" id="svg_25" cy="150" cx="167.36737" fill="none"/>
+   <text transform="matrix(0.654917 0 0 0.654917 15.1837 15.3562)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_8" y="105.25589" x="402.53777" stroke-width="0" fill="#000000">JDK</text>
+   <g stroke="null" id="svg_30">
+    <text transform="matrix(0.654917 0 0 0.654917 15.1837 15.3562)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_7" y="216.25591" x="86.53776" fill="#000000">JRE</text>
+    <g stroke="null" id="svg_29">
+     <g stroke="null" id="svg_27">
+      <ellipse stroke="#000000" ry="22.92208" rx="60.25231" id="svg_23" cy="123.14842" cx="178.71922" fill="none"/>
+      <text transform="matrix(0.654917 0 0 0.654917 15.1837 15.3562)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_9" y="175.25587" x="176.12106" stroke-width="0" fill="#000000">JVM（跨平台）</text>
+     </g>
+     <g stroke="null" id="svg_28">
+      <ellipse stroke="#000000" ry="22.92208" rx="60.25231" id="svg_26" cy="176.85158" cx="178.71923" fill="none"/>
+      <text transform="matrix(0.654917 0 0 0.654917 15.1837 15.3562)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_10" y="257.25586" x="201.70438" stroke-width="0" fill="#000000">核心类库</text>
+     </g>
+    </g>
+   </g>
+   <g stroke="null" id="svg_31">
+    <ellipse stroke="#000" ry="35.03803" rx="47.80891" id="svg_3" cy="150" cx="341.6843" fill="#fff"/>
+    <text transform="matrix(0.654917 0 0 0.654917 15.1837 15.3562)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_11" y="216.2559" x="450.53782" stroke-width="0" fill="#000000">开发工具</text>
+   </g>
+  </g>
+ </g>
+</svg>
+<span id="more"></span>
+<h2 id="idea-管理-java-程序的结构"><a class="markdownIt-Anchor" href="#idea-管理-java-程序的结构"></a> IDEA 管理 java 程序的结构</h2>
+<blockquote>
+<ol>
+<li>project</li>
+<li>module</li>
+<li>package</li>
+<li>class</li>
+</ol>
+</blockquote>
+<h2 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world"></a> Hello World</h2>
+<details class="mkmt mt-code " open>
+<summary>代码：</summary>
+<pre><code class="highlight java"><span class="comment">// HelloWorld.java</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;
+        System.out.println(<span class="string">&quot;Hello World!&quot;</span>);
+    &#125;
+&#125;</code></pre>
+</details>
+<p>注意：</p>
+<ul>
+<li>文件名必须与类名一致</li>
+<li>编译：<code>javac HelloWorld.java</code></li>
+<li>运行：<code>java HelloWorld</code></li>
+<li>Java11 开始可以直接用 <code>java</code> 命令运行源代码</li>
+</ul>
+<h1 id="语法基础"><a class="markdownIt-Anchor" href="#语法基础"></a> 语法基础</h1>
+<h2 id="注释"><a class="markdownIt-Anchor" href="#注释"></a> 注释</h2>
+<ul>
+<li>单行注释 <code>//</code></li>
+<li>多行注释<div class="rbcode">
+<pre><code class="highlight java"><span class="comment">/*</span>
+<span class="comment">...</span>
+<span class="comment">*/</span></code></pre>
+</div>
+</li>
+<li>文档注释<div class="rbcode">
+<pre><code class="highlight java"><span class="comment">/**</span>
+<span class="comment"> * ...</span>
+<span class="comment"> */</span></code></pre>
+</div>
+</li>
+</ul>
+<h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
+<table>
+    <tr>
+        <th align="center" colspan="2">类型</th>
+        <th align="center">字节数</th>
+    </tr>
+    <tr>
+        <td align="center" rowspan="4">整型</td>
+        <td align="center">byte</td>
+        <td align="center">1</td>
+    </tr>
+    <tr>
+        <td align="center">short</td>
+        <td align="center">2</td>
+    </tr>
+    <tr>
+        <td align="center">int</td>
+        <td align="center">4</td>
+    </tr>
+    <tr>
+        <td align="center">long</td>
+        <td align="center">8</td>
+    </tr>
+    <tr>
+        <td align="center" rowspan="2">浮点型</td>
+        <td align="center">float</td>
+        <td align="center">4</td>
+    </tr>
+    <tr>
+        <td align="center">double</td>
+        <td align="center">8</td>
+    </tr>
+    <tr>
+        <td align="center">字符型</td>
+        <td align="center">char</td>
+        <td align="center">2</td>
+    </tr>
+    <tr>
+        <td align="center">布尔型</td>
+        <td align="center">boolean</td>
+        <td align="center">1</td>
+    </tr>
+</table>
+<h2 id="字面量"><a class="markdownIt-Anchor" href="#字面量"></a> 字面量</h2>
+<ul>
+<li>整数，小数，字符，字符串，布尔值与 C++ 基本相同</li>
+<li>空值：<code>null</code></li>
+<li>二进制字面量以 <code>0b</code> 或 <code>0B</code> 开头，十六进制字面量以 <code>0x</code> 或 <code>0X</code> 开头</li>
+<li>整型字面量默认为 <code>int</code> 类型，浮点型字面量默认为 <code>double</code> 类型。</li>
+<li><code>long</code> 字面量后缀为 <code>l</code> 或 <code>L</code></li>
+<li><code>float</code> 字面量后缀为 <code>f</code> 或 <code>F</code></li>
+</ul>
+<h2 id="类型转换"><a class="markdownIt-Anchor" href="#类型转换"></a> 类型转换</h2>
+<ul>
+<li>
+<p><strong>自动类型转换：</strong></p>
+<p>范围小的变量可直接赋值给范围大的变量，包括初始化。</p>
+</li>
+<li>
+<p><strong>类型提升：</strong></p>
+<p>与 C++ 类似。<code>byte</code>，<code>short</code>，<code>char</code> 会直接转换为 <code>int</code> 类型运算。</p>
+</li>
+<li>
+<p><strong>强制类型转换：</strong></p>
+<p>范围大的变量不能直接赋值给范围小的变量，需要强制转换。</p>
+<p>但复合赋值运算符会<strong>隐式</strong>强制类型转换。</p>
+</li>
+</ul>
+<h2 id="运算符"><a class="markdownIt-Anchor" href="#运算符"></a> 运算符</h2>
+<ul>
+<li><code>+</code> 可作为连接符：能加就加，不能加就转换为字符串连接。</li>
+<li><code>=</code> 赋值运算符不能隐式收缩转换</li>
+<li><code>? :</code> 三元运算符与 C++ 相同</li>
+</ul>
+<h2 id="scanner"><a class="markdownIt-Anchor" href="#scanner"></a> Scanner</h2>
+<p>当使用的类不是 <code>java.lang</code> 包中的时，需要导入。</p>
+<p><code>Scanner</code> 位于 <code>java.util.Scanner</code>。</p>
+<p>创建 <code>Scanner</code>：</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</code></pre>
+</div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>String nextLine()</code></td>
+<td>读取下一行输入</td>
+</tr>
+<tr>
+<td><code>String next()</code></td>
+<td>读取下一个单词</td>
+</tr>
+<tr>
+<td><code>int nextInt()</code></td>
+<td>读取下一个整数</td>
+</tr>
+<tr>
+<td><code>double nextDouble()</code></td>
+<td>读取下一个浮点数</td>
+</tr>
+<tr>
+<td><code>boolean hasNext()</code></td>
+<td>检测输入流中是否还有单词</td>
+</tr>
+<tr>
+<td><code>boolean hasNextInt()</code></td>
+<td>检测下一个字符序列是否是一个整数</td>
+</tr>
+<tr>
+<td><code>boolean hasNextDouble()</code></td>
+<td>检测下一个字符序列是否是一个浮点数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="随机数"><a class="markdownIt-Anchor" href="#随机数"></a> 随机数</h2>
+<p><code>Random</code> 位于 <code>java.util.Random</code>。</p>
+<p>生成 0 - 99 间的随机数：</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="type">Random</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();
+<span class="type">int</span> <span class="variable">rs</span> <span class="operator">=</span> r.nextInt(<span class="number">100</span>);</code></pre>
+</div>
+<h2 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h2>
+<p><strong>声明和创建：</strong></p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="type">int</span>[] a;
+<span class="type">int</span>[] b = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">100</span>]; <span class="comment">//动态</span>
+<span class="type">int</span>[] c = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;; <span class="comment">//静态</span>
+<span class="type">int</span>[] d = &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;; <span class="comment">//简写</span></code></pre>
+</div>
+<p>静态初始化和动态初始化时独立的，不能混用：</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;; <span class="comment">//错误</span></code></pre>
+</div>
+<p>动态初始化数组时，数值类型元素会初始化为 <code>0</code> 或 <code>false</code>，对象类型元素初始化为 <code>null</code>。</p>
+<p><strong>数组长度：</strong> <code>a.length</code></p>
+<p>数组拷贝会引用同一个数组对象。</p>
+<h2 id="访问修饰符"><a class="markdownIt-Anchor" href="#访问修饰符"></a> 访问修饰符</h2>
+<p><strong>对成员修饰：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th style="text-align:center">本类</th>
+<th style="text-align:center">同包中其他类</th>
+<th style="text-align:center">任意包中子类</th>
+<th style="text-align:center">任意包中任意类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">✗</td>
+</tr>
+<tr>
+<td style="text-align:center">默认</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">✗</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✗</td>
+</tr>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对类修饰：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th style="text-align:center">可见性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">不允许声明</td>
+</tr>
+<tr>
+<td style="text-align:center">默认</td>
+<td style="text-align:center">同一包内的类</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">不允许声明</td>
+</tr>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">所有类</td>
+</tr>
+</tbody>
+</table>
+<h1 id="常用-api"><a class="markdownIt-Anchor" href="#常用-api"></a> 常用 API</h1>
+<h2 id="string"><a class="markdownIt-Anchor" href="#string"></a> String</h2>
+<p><strong>构造器：</strong></p>
+<ul>
+<li><code>String()</code></li>
+<li><code>String(String original)</code></li>
+<li><code>String(char[] chars)</code></li>
+<li><code>String(byte[] bytes)</code></li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>int length()</code></li>
+<li><code>char charAt(int index)</code></li>
+<li><code>char[] toCharArray()</code></li>
+<li><code>boolean equals(Object anObject)</code></li>
+<li><code>boolean equalsIgnoreCase(String anotherString)</code></li>
+<li><code>String substring(int beginIndex, int endIndex)</code></li>
+<li><code>String substring(int beginIndex)</code></li>
+<li><code>String replace(CharSequence target, CharSequence replacement)</code></li>
+<li><code>boolean contains(CharSequence s)</code></li>
+<li><code>boolean startsWith(String prefix)</code></li>
+<li><code>String[] split(String regex)</code></li>
+</ul>
+<h2 id="arrayliste"><a class="markdownIt-Anchor" href="#arrayliste"></a> ArrayList&lt;E&gt;</h2>
+<p><strong>构造器：</strong></p>
+<ul>
+<li><code>ArrayList()</code>：创建一个初始容量为 10 的数组列表</li>
+<li><code>ArrayList(int initialCapacity)</code></li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>boolean add(E e)</code>：成功返回 <code>true</code></li>
+<li><code>E get(int index)</code></li>
+<li><code>void add(int index, E element)</code></li>
+<li><code>int size()</code></li>
+<li><code>E remove(int index)</code>：返回被删除的元素</li>
+<li><code>boolean remove(Object o)</code>：删除指定元素，返回之前是否存在</li>
+<li><code>E set(int index, E element)</code>：返回被修改的元素</li>
+</ul>
+<p>注意，<code>ArrayList</code> 不能使用基本数据类型，要使用对应的包装类。</p>
+<h2 id="object-类"><a class="markdownIt-Anchor" href="#object-类"></a> Object 类</h2>
+<p><code>public String toString()</code>：</p>
+<ul>
+<li>默认得到地址</li>
+<li>重写后改变输出</li>
+</ul>
+<p><code>public boolean equals(Object o)</code>：</p>
+<ul>
+<li>默认比较地址，与 <code>==</code> 作用相同</li>
+<li>一般重写为比较内容</li>
+</ul>
+<p><code>protected Object clone()</code>：</p>
+<ul>
+<li>默认无法通过子类对象访问</li>
+<li>需要重写，提供 <code>public</code> 修饰符</li>
+<li>不可变成员可以直接浅拷贝</li>
+<li>要实现 <code>Cloneable</code> 接口，这是一个标记接口</li>
+</ul>
+<h2 id="objects-类"><a class="markdownIt-Anchor" href="#objects-类"></a> Objects 类</h2>
+<p><code>public static boolean equals(Object a, Object b)</code>：</p>
+<ul>
+<li>先做 <code>null</code> 判断，再比较两个对象</li>
+</ul>
+<p><code>public static boolean isNull(Object obj)</code>：</p>
+<ul>
+<li>等价于 <code>obj == null</code></li>
+</ul>
+<p><code>public static boolean nonNull(Object obj)</code>：</p>
+<ul>
+<li>等价于 <code>obj != null</code></li>
+</ul>
+<h2 id="包装类"><a class="markdownIt-Anchor" href="#包装类"></a> 包装类</h2>
+<p><code>int</code> 类型对应的包装类是 <code>Integer</code>，<code>char</code> 是 <code>Character</code>，其他基本类型只需要首字母大写。</p>
+<p><code>Integer.valueOf(int i)</code>：会对小范围整数对象进行缓存，效率更高。因此构造器被弃用。</p>
+<p>自动装箱、拆箱：直接与 <code>int</code> 混用。</p>
+<p>常用方法：</p>
+<ul>
+<li><code>public static String toString(int i)</code>：转换为字符串</li>
+<li><code>public static String toString(int i, int radix)</code>：转换为目标进制字符串</li>
+<li><code>public String toString()</code>：在包装类对象上调用</li>
+<li><code>public static int parseInt(String s)</code>：转换为整数</li>
+<li><code>public static Integer valueOf(String s)</code>：转换为整数并装箱</li>
+<li><code>public static int parseInt(String s, int radix)</code>：某进制字符串转换为整数</li>
+<li><code>public static Integer valueOf(String s, int radix)</code>：某进制字符串转换为整数并装箱</li>
+</ul>
+<h2 id="stringbuilder-和-stringbuffer"><a class="markdownIt-Anchor" href="#stringbuilder-和-stringbuffer"></a> StringBuilder 和 StringBuffer</h2>
+<h3 id="stringbuilder"><a class="markdownIt-Anchor" href="#stringbuilder"></a> StringBuilder</h3>
+<p><strong>构造器：</strong></p>
+<ul>
+<li><code>StringBuilder()</code>：空构建器，初始容量为 16 字符</li>
+<li><code>StringBuilder(int capacity)</code>：指定初始容量</li>
+<li><code>StringBuilder(CharSequence seq)</code>：指定初始内容为 <code>seq</code></li>
+<li><code>StringBuilder(String str)</code>：指定初始内容为 <code>str</code></li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>StringBuilder append(...)</code>：支持追加各种类型数据，返回对象本身</li>
+<li><code>StringBuilder reverse()</code>：反转内容</li>
+<li><code>int length()</code>：返回长度</li>
+<li><code>String toString()</code>：转换为字符串</li>
+</ul>
+<h3 id="stringbuffer"><a class="markdownIt-Anchor" href="#stringbuffer"></a> StringBuffer</h3>
+<ul>
+<li>用法与 <code>StringBuilder</code> 相同</li>
+<li>区别是 <code>StringBuffer</code> 是线程安全的</li>
+</ul>
+<h2 id="stringjoiner"><a class="markdownIt-Anchor" href="#stringjoiner"></a> StringJoiner</h2>
+<p>从 JDK 8 开始加入，有些场景下操作字符串更简洁。</p>
+<p><strong>构造器：</strong></p>
+<ul>
+<li><code>StringJoiner(间隔符号)</code></li>
+<li><code>StringJoiner(间隔符号, 开始符号, 结束符号)</code></li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>StringJoiner add(添加内容)</code>：添加数据，并返回对象本身</li>
+<li><code>int length()</code></li>
+<li><code>String toString()</code></li>
+</ul>
+<h2 id="math"><a class="markdownIt-Anchor" href="#math"></a> Math</h2>
+<ul>
+<li><code>int abs(int a)</code></li>
+<li><code>double ceil(double a)</code></li>
+<li><code>double floor(double a)</code></li>
+<li><code>int round(float a)</code></li>
+<li><code>int max(int a, int b)</code></li>
+<li><code>double pow(double a, double b)</code></li>
+<li><code>double random()</code>：随机值范围 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">[</mo><mtext> </mtext><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left[\,0, 1\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></li>
+</ul>
+<h2 id="system"><a class="markdownIt-Anchor" href="#system"></a> System</h2>
+<ul>
+<li><code>void exit(int status)</code>：实际调用的是 <code>Runtime</code> 对象的方法</li>
+<li><code>long currentTimeMillis()</code>：返回 1970-1-1 0:00 到当前的毫秒数</li>
+</ul>
+<h2 id="runtime"><a class="markdownIt-Anchor" href="#runtime"></a> Runtime</h2>
+<p>代表程序的运行环境，是一个单例类。可以使用 <code>getRuntime()</code> 方法获得当前运行时对象。</p>
+<p><strong>常见方法：</strong></p>
+<ul>
+<li><code>void exit(int status)</code></li>
+<li><code>int availableProcessors()</code>：返回 Java 虚拟机可用的处理器数</li>
+<li><code>long totalMemory()</code>：返回虚拟机中的内存总量</li>
+<li><code>long freeMemory()</code>：返回虚拟机中的可用内存</li>
+<li><code>Process exec(String commnad)</code>：启动某个程序，并返回代表该程序的对象</li>
+</ul>
+<h2 id="bigdecimal"><a class="markdownIt-Anchor" href="#bigdecimal"></a> BigDecimal</h2>
+<p><strong>构造器：</strong></p>
+<ul>
+<li><code>BigDecimal(double val)</code>：不推荐</li>
+<li><code>BigDecimal(String val)</code></li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>static BigDecimal(double val)</code></li>
+<li>运算：<code>add</code>、<code>substract</code>、<code>multiply</code>、<code>divide</code></li>
+<li><code>BigDecimal divide(对象, 精确到几位, 舍入模式)</code></li>
+<li><code>double doubleValue()</code></li>
+</ul>
+<p>除法如果不能精确表示结果会产生异常，必须指定如何舍入。四舍五入：<code>RoundingMode.HALF_UP</code></p>
+<h2 id="jdk-8-之前的日期和时间"><a class="markdownIt-Anchor" href="#jdk-8-之前的日期和时间"></a> JDK 8 之前的日期和时间</h2>
+<h3 id="date"><a class="markdownIt-Anchor" href="#date"></a> Date</h3>
+<p><strong>构造器：</strong></p>
+<ul>
+<li><code>Date()</code>：构造一个 <code>Date</code> 对象，代表当前日期和时间</li>
+<li><code>Date(long time)</code>：由时间毫秒值构造日期对象</li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>long getTime()</code>：返回时间毫秒数</li>
+<li><code>void setTime(long time)</code>：设置对象时间为时间毫秒数对应的时间</li>
+</ul>
+<h3 id="simpledateformat"><a class="markdownIt-Anchor" href="#simpledateformat"></a> SimpleDateFormat</h3>
+<p><strong>构造器：</strong></p>
+<ul>
+<li><code>SimpleDateFormat(String pattern)</code>：创建对象并封装时间的格式</li>
+</ul>
+<p><strong>格式描述方法：</strong></p>
+<table>
+    <tr>
+        <td><b>y</b></td>
+        <td>年</td>
+        <td><b>m</b></td>
+        <td>分</td>
+    </tr>
+    <tr>
+        <td><b>M</b></td>
+        <td>月</td>
+        <td><b>s</b></td>
+        <td>秒</td>
+    </tr>
+    <tr>
+        <td><b>d</b></td>
+        <td>日</td>
+        <td><b>EEE</b></td>
+        <td>星期</td>
+    </tr>
+    <tr>
+        <td><b>H</b></td>
+        <td>时</td>
+        <td><b>a</b></td>
+        <td>上午/下午</td>
+    </tr>
+</table>
+<p>示例用法：<code>&quot;yyyy年MM月dd日 HH:mm:ss EEE a&quot;</code></p>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>final String format(Date date)</code>：将日期格式化为日期/时间字符串</li>
+<li><code>final String format(Object time)</code>：将时间毫秒值格式化为日期/时间字符串</li>
+<li><code>Date parse(String source)</code>：把字符串时间解析成日期对象，格式不一致会抛出异常</li>
+</ul>
+<h2 id="jdk-8-之后的日期和时间"><a class="markdownIt-Anchor" href="#jdk-8-之后的日期和时间"></a> JDK 8 之后的日期和时间</h2>
+<h3 id="对比"><a class="markdownIt-Anchor" href="#对比"></a> 对比</h3>
+<ul>
+<li>JDK 8 之前：都是可变对象，线程不安全，只能精确到毫秒</li>
+<li>JDK 8 之后：都是不可变对象，线程安全，能精确到毫秒、纳秒</li>
+</ul>
+<h3 id="新增的-api"><a class="markdownIt-Anchor" href="#新增的-api"></a> 新增的 API</h3>
+<table>
+    <tr>
+        <th>作用</th>
+        <th colspan="2">API</th>
+    </tr>
+    <tr>
+        <td rowspan="5">代替 Calendar</td>
+        <td>LocalDate</td>
+        <td>年、月、日、星期</td>
+    <tr>
+        <td>LocalTime</td>
+        <td>时、分、秒、纳秒</td>
+    </tr>
+    <tr>
+        <td>LocalDateTime</td>
+        <td>两者结合</td>
+    </tr>
+    <tr>
+        <td>ZoneId</td>
+        <td>时区</td>
+    </tr>
+    <tr>
+        <td>ZoneDateTime</td>
+        <td>带时区的时间</td>
+    </tr>
+    <tr>
+        <td>代替 Date</td>
+        <td>Instant</td>
+        <td>时间戳/时间线</td>
+    </tr>
+    <tr>
+        <td>代替 SimpleDateFormat</td>
+        <td>DateTimeFormatter</td>
+        <td>时间格式化和解析</td>
+    </tr>
+    <tr>
+        <td rowspan="2">其他补充</td>
+        <td>Period</td>
+        <td>时间间隔（年、月、日）</td>
+    </tr>
+    <tr>
+        <td>Duration</td>
+        <td>时间间隔（时、分、秒、纳秒）</td>
+    </tr>
+</table>
+<h3 id="localdate-localtime-和-localdatetime"><a class="markdownIt-Anchor" href="#localdate-localtime-和-localdatetime"></a> LocalDate、LocalTime 和 LocalDateTime</h3>
+<p>**获取对象：**调用静态方法 <code>now()</code> 方法获取当前时间对应的对象</p>
+<p><strong>用法：</strong></p>
+<p><strong>LocalDate：</strong></p>
+<ul>
+<li>输出：<code>年-月-日</code></li>
+<li>获取对象中的信息：
+<ul>
+<li>年：<code>getYear()</code></li>
+<li>月：<code>getMonthValue()</code></li>
+<li>日：<code>getDayOfMonth()</code></li>
+<li>一年中的第几天：<code>getDayOfYear()</code></li>
+<li>星期几：<code>getDayOfWeek().getValue()</code></li>
+</ul>
+</li>
+<li>修改某个信息：<code>withYear</code>、<code>withMonth</code>、<code>withDayOfMonth</code>、<code>withDayOfYear</code></li>
+<li>把某个信息加多少：<code>plusYears</code>、<code>plusMonths</code>、<code>plusDays</code>、<code>plusWeeks</code></li>
+<li>把某个信息减多少：改成 <code>minus</code></li>
+<li>获取指定日期的对象：<code>LocalDate.of(年, 月, 日)</code></li>
+<li>比较两个日期对象：<code>equals</code>、<code>isBefore</code>、<code>isAfter</code></li>
+</ul>
+<p><strong>LocalTime：</strong></p>
+<ul>
+<li>输出：<code>时:分:秒.纳秒</code></li>
+<li>获取对象中的信息：<code>getHour</code>、<code>getMinute</code>、<code>getSecond</code>、<code>getNano</code></li>
+<li>修改某个信息：改成 <code>with</code></li>
+<li>加减：<code>plus</code>、<code>minus</code></li>
+<li>比较：同上</li>
+</ul>
+<p><strong>LocalDateTime：</strong></p>
+<ul>
+<li>输出：<code>年-月-日T时:分:秒.纳秒</code></li>
+<li>包含前两者的方法</li>
+<li>转换：
+<ul>
+<li><code>toLocalDate()</code></li>
+<li><code>toLocalTime()</code></li>
+<li><code>of(LocalDate date, LocalTime time)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="zoneid-和-zonedatetime"><a class="markdownIt-Anchor" href="#zoneid-和-zonedatetime"></a> ZoneId 和 ZoneDateTime</h3>
+<p><strong>ZoneId：</strong></p>
+<ul>
+<li>获取系统默认时区：使用 <code>static ZoneId systemDefault()</code> 获取 <code>ZoneId</code> 对象，使用 <code>String getId()</code> 方法获取时区。默认以 <code>getId</code> 内容输出。</li>
+<li>获取 Java 支持的全部时区 Id：<code>static Set&lt;String&gt; getAvailableZoneIds()</code></li>
+<li>把某个时区 Id 封装成 ZoneId 对象：<code>static ZoneId of(String zoneId)</code></li>
+</ul>
+<p>**ZoneDateTime：**带时区的时间</p>
+<ul>
+<li>获取某个时区的 ZoneDateTime 对象：<code>static ZoneDateTime now(ZoneId zone)</code></li>
+<li>获取系统默认时区的 ZoneDateTime 对象：<code>static ZoneDateTime now()</code></li>
+<li>获取世界标准时间：<code>ZoneDateTime.now(Clock.systemUTC())</code></li>
+<li>其他方法与 LocalDateTime 相同</li>
+</ul>
+<h3 id="instant"><a class="markdownIt-Anchor" href="#instant"></a> Instant</h3>
+<p>通过 Instant 可以拿到此刻的时间，包括从 1970 开始的总秒数和不够一秒的纳秒数。</p>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>static Instant now()</code>： 获取当前 Instant 对象</li>
+<li><code>long getEpochSecond()</code>：获取 1970 开始的秒数</li>
+<li><code>int getNano()</code>：获取不足一秒的纳秒数</li>
+<li>增加时间：<code>plusSeconds</code>、<code>plusMillis</code>、<code>plusNanos</code></li>
+<li>减少时间：改为 <code>minus</code></li>
+<li>比较时间：<code>equals</code>、<code>isBefore</code>、<code>isAfter</code></li>
+</ul>
+<h3 id="datetimeformatter"><a class="markdownIt-Anchor" href="#datetimeformatter"></a> DateTimeFormatter</h3>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>static DateTimeFormatter ofPattern(时间格式)</code>：获取格式化器对象</li>
+<li><code>String format(时间对象)</code>：格式化时间</li>
+</ul>
+<p>时间对象也可以调用自己的 <code>format</code> 方法，传入一个 DateTimeFormatter 对象。</p>
+<p>解析时间：一般用 LocalDateTime 提供的方法解析，调用 <code>static parse(字符串, 格式化器)</code>。</p>
+<h3 id="period"><a class="markdownIt-Anchor" href="#period"></a> Period</h3>
+<p>用于计算两个 LocalDate 对象相差的年、月、日。</p>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li>得到 Period 对象：<code>static Period between(LocalDate start, LocalDate end)</code></li>
+<li>得到间隔：<code>getYears</code>、<code>getMonths</code>、<code>getDays</code></li>
+</ul>
+<h3 id="duration"><a class="markdownIt-Anchor" href="#duration"></a> Duration</h3>
+<p>用于计算相差的天数、时、分、秒、纳秒。支持 LocalTime、LocalDateTime、Instant。</p>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li>得到对象：<code>static Duration between(开始对象, 截止对象)</code></li>
+<li>计算间隔：<code>toDays</code>、<code>toHours</code>、<code>toMinutes</code>、<code>toSeconds</code>、<code>toMillis</code>、<code>toNanos</code></li>
+</ul>
+<h2 id="arrays"><a class="markdownIt-Anchor" href="#arrays"></a> Arrays</h2>
+<p>用于操作数组的一个工具类。</p>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><code>static String toString(T[] arr)</code>：返回数组内容</li>
+<li><code>static T[] copyOfRange(T[] arr, int begin, int end)</code>：拷贝数组</li>
+<li><code>static T[] copyOf(T[] arr, int newLength)</code>：拷贝数组，不足的数据会值初始化</li>
+<li><code>static void setAll(T[] arr, IntFunction&lt;? extends T&gt; generator)</code>：把数组中原数据修改为新数据</li>
+<li><code>static void sort(T[] arr)</code>：排序</li>
+</ul>
+<p><strong>排序：</strong></p>
+<p>自定义排序规则：</p>
+<ul>
+<li>实现 <code>Comparable&lt;T&gt;</code> 接口，重写 <code>compareTo(T o)</code> 方法</li>
+<li>使用 <code>static &lt;T&gt; void sort(T[] arr, Comparator&lt;? super T&gt; c)</code></li>
+</ul>
+<h1 id="面向对象高级"><a class="markdownIt-Anchor" href="#面向对象高级"></a> 面向对象高级</h1>
+<h2 id="初始化块"><a class="markdownIt-Anchor" href="#初始化块"></a> 初始化块</h2>
+<p><strong>静态代码块：</strong></p>
+<ul>
+<li>格式：<code>static &#123;...&#125;</code></li>
+<li>类加载时执行</li>
+</ul>
+<p><strong>实例代码块：</strong></p>
+<ul>
+<li>格式：<code>&#123;...&#125;</code></li>
+<li>执行流程：
+<ol>
+<li>执行委托构造</li>
+<li>将所有实例字段值初始化</li>
+<li>按照类中声明顺序，执行字段初始化和初始化块</li>
+<li>执行构造器主体代码</li>
+</ol>
+</li>
+</ul>
+<h2 id="单例模式"><a class="markdownIt-Anchor" href="#单例模式"></a> 单例模式</h2>
+<p><strong>饿汉式单例</strong>：拿对象时，已经创建好了</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> &#123;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">A</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();
+    <span class="keyword">private</span> <span class="title function_">A</span><span class="params">()</span> &#123;&#125;
+    <span class="keyword">public</span> <span class="keyword">static</span> A <span class="title function_">getInstance</span><span class="params">()</span> &#123;
+        <span class="keyword">return</span> instance;
+    &#125;
+&#125;</code></pre>
+</div>
+<p><strong>懒汉式单例</strong>：拿对象时，才创建对象</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> &#123;
+    <span class="keyword">private</span> <span class="keyword">static</span> A instance;
+    <span class="keyword">private</span> <span class="title function_">A</span><span class="params">()</span> &#123;&#125;
+    <span class="keyword">public</span> <span class="keyword">static</span> A <span class="title function_">getInstance</span><span class="params">()</span> &#123;
+        <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;
+            instance = <span class="keyword">new</span> <span class="title class_">A</span>();
+        &#125;
+        <span class="keyword">return</span> instance;
+    &#125;
+&#125;</code></pre>
+</div>
+<h2 id="方法重写"><a class="markdownIt-Anchor" href="#方法重写"></a> 方法重写</h2>
+<p>与 C++ 不同，不需要使用 <code>virtual</code> 即可重写方法。</p>
+<p>可以使用 <code>@Override</code> 注解检查重写是否正确，与 Python 装饰器使用格式相同。</p>
+<p>重写支持协变返回类型。</p>
+<p>重写 <code>toString()</code> 方法可改变默认输出。</p>
+<p>重写方法的访问权限必须大于等于父类被重写方法的访问权限。私有方法，静态方法不能重写。</p>
+<h2 id="成员隐藏"><a class="markdownIt-Anchor" href="#成员隐藏"></a> 成员隐藏</h2>
+<p>子类与父类同名的成员会隐藏父类的成员，可使用 <code>super</code> 访问。</p>
+<p>局部变量也会隐藏成员变量，可使用 <code>this</code> 访问。</p>
+<h2 id="子类构造器"><a class="markdownIt-Anchor" href="#子类构造器"></a> 子类构造器</h2>
+<ul>
+<li>子类构造器都会先调用父类构造器</li>
+<li>默认调用父类无参构造器</li>
+<li>可使用 <code>super(...)</code> 调用父类其他构造器，尤其是父类没有无参构造器的时候</li>
+</ul>
+<h2 id="final"><a class="markdownIt-Anchor" href="#final"></a> final</h2>
+<ul>
+<li>修饰类：不能被继承</li>
+<li>修饰方法：不能被重写</li>
+<li>修饰变量：只能被赋值一次</li>
+</ul>
+<p><strong>常量：</strong></p>
+<p>使用 <code>static final</code> 修饰的成员变量被称为常量。<br />
+编译后，常量会被宏替换。</p>
+<h2 id="抽象类"><a class="markdownIt-Anchor" href="#抽象类"></a> 抽象类</h2>
+<ul>
+<li>抽象类中不一定有抽象方法，包含抽象方法的一定要被声明为抽象类</li>
+<li>抽象类不能创建实例，但可以创建抽象类的对象变量（指针）</li>
+<li>没有抽象方法的抽象类也不能创建实例</li>
+<li>子类重写全部抽象方法后，就可以去掉 <code>abstract</code> 修饰</li>
+</ul>
+<h2 id="接口"><a class="markdownIt-Anchor" href="#接口"></a> 接口</h2>
+<p><strong>语法格式：</strong></p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> interface 接口名  &#123;
+    <span class="comment">// 成员变量（常量，不用加 public static final）</span>
+    <span class="comment">// 成员方法（抽象方法，不用加 public abstract）</span>
+&#125;</code></pre>
+</div>
+<p>接口中所有方法都自动是 <code>public</code> 方法。</p>
+<p>接口不能创建对象，用于被类实现，实现接口的类被称为实现类：</p>
+<div class="rbcode">
+<pre><code class="highlight java">访问修饰符 class 实现类 implements 接口<span class="number">1</span>, 接口<span class="number">2</span>, ... &#123;
+    ...
+&#125;</code></pre>
+</div>
+<p>实现类必须重写全部接口的全部抽象方法，否则需要被定义为抽象类。</p>
+<p><strong>默认方法</strong> (since JDK 8)：用 <code>default</code> 修饰，带有方法体。可通过实现类调用。</p>
+<p><strong>私有方法</strong> (since JDK 9)：用 <code>private</code> 修饰，可在其他方法中访问。</p>
+<p><strong>静态方法</strong> (since JDK 8)：用 <code>static</code> 修饰，可通过接口名调用。</p>
+<h2 id="内部类"><a class="markdownIt-Anchor" href="#内部类"></a> 内部类</h2>
+<h3 id="成员内部类"><a class="markdownIt-Anchor" href="#成员内部类"></a> 成员内部类</h3>
+<p><strong>使用内部类的原因：</strong></p>
+<ul>
+<li>内部类可以对同一个包中的其他类隐藏</li>
+<li>内部类可以访问外部类中定义的私有数据</li>
+</ul>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Outer</span> &#123;
+    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Inner</span> &#123;
+        ...
+    &#125;
+&#125;</code></pre>
+</div>
+<p>在类的内部定义的类，基本与类相同。JDK 16 开始支持在内部类中定义静态成员。</p>
+<p>内部类实例只能由外部类实例创建，有一个对创建它的外部类实例的隐式引用。</p>
+<p>内部类可以是私有的。</p>
+<ul>
+<li>外部类引用：<code>OuterClass.this</code></li>
+<li>构造内部类对象：<code>outerObject.new InnerClass(...)</code></li>
+<li>在外部类作用域之外表示内部类：<code>OuterClass.InnerClass</code></li>
+</ul>
+<h3 id="静态内部类"><a class="markdownIt-Anchor" href="#静态内部类"></a> 静态内部类</h3>
+<p><strong>使用静态内部类的原因：</strong></p>
+<ul>
+<li>把一个类隐藏在一个类的内部</li>
+<li>不需要内部类有外部类对象的引用</li>
+</ul>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Outer</span> &#123;
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Inner</span> &#123;
+        ...
+    &#125;
+&#125;</code></pre>
+</div>
+<p>构造静态内部类对象：<code>new OuterClass.InnerClass()</code></p>
+<h3 id="局部内部类"><a class="markdownIt-Anchor" href="#局部内部类"></a> 局部内部类</h3>
+<p>在一个方法中可定义局部内部类，对外界完全隐藏。</p>
+<p>声明局部类时不能有访问说明符。</p>
+<h3 id="匿名内部类"><a class="markdownIt-Anchor" href="#匿名内部类"></a> 匿名内部类</h3>
+<p><strong>格式：</strong></p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">new</span> 类或接口(构造参数...) &#123;
+    类体(一般是方法重写);
+&#125;</code></pre>
+</div>
+<p>匿名内部类是一个子类，并且会立即创建一个子类对象。</p>
+<p>不能有任何构造参数，参数会直接传递给超类构造器。可以有初始化块。</p>
+<p>匿名内部类在开发中通常直接作为参数传递给方法。</p>
+<h2 id="枚举"><a class="markdownIt-Anchor" href="#枚举"></a> 枚举</h2>
+<p><strong>语法格式</strong>：</p>
+<div class="rbcode">
+<pre><code class="highlight java">修饰符 <span class="keyword">enum</span> 枚举类名 &#123;
+    名称<span class="number">1</span>, 名称<span class="number">2</span>, ...;
+    其他成员...
+&#125;</code></pre>
+</div>
+<ul>
+<li>枚举类的第一行只能是一些名称，都是常量，表示枚举类对象</li>
+<li>枚举类的构造器都是私有的</li>
+<li>枚举都是最终类，不能被继承</li>
+<li>枚举类继承 <code>java.lang.Enum</code> 类</li>
+<li>在 <code>switch</code> 中使用枚举时<strong>不用</strong>枚举类前缀</li>
+</ul>
+<p>假设有 <code>public enum A</code>，常用方法：</p>
+<ul>
+<li><code>A[] values()</code>：拿到全部枚举对象</li>
+<li><code>A valueOf(String name)</code>：根据名字获得枚举对象</li>
+<li><code>String object.name()</code>：枚举对象名</li>
+<li><code>int object.ordinal()</code>：枚举对象索引</li>
+</ul>
+<h3 id="抽象枚举"><a class="markdownIt-Anchor" href="#抽象枚举"></a> 抽象枚举</h3>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Color</span> &#123;
+    R(<span class="string">&quot;Red&quot;</span>) &#123;
+        <span class="meta">@Override</span>
+        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dipict</span><span class="params">()</span> &#123;
+            System.out.println(getName() + <span class="string">&quot;: #ff0000&quot;</span>);
+        &#125;
+    &#125;,
+    G(<span class="string">&quot;Green&quot;</span>) &#123;
+        <span class="meta">@Override</span>
+        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dipict</span><span class="params">()</span> &#123;
+            System.out.println(getName() + <span class="string">&quot;: #00ff00&quot;</span>);
+        &#125;
+    &#125;,
+    B(<span class="string">&quot;Blue&quot;</span>) &#123;
+        <span class="meta">@Override</span>
+        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dipict</span><span class="params">()</span> &#123;
+            System.out.println(getName() + <span class="string">&quot;: #0000ff&quot;</span>);
+        &#125;
+    &#125;;
+
+    <span class="keyword">private</span> String name;
+
+    Color(String name) &#123;
+        <span class="built_in">this</span>.name = name;
+    &#125;
+
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">dipict</span><span class="params">()</span>;
+
+    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;
+        <span class="keyword">return</span> name;
+    &#125;
+
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;
+        <span class="built_in">this</span>.name = name;
+    &#125;
+&#125;</code></pre>
+</div>
+<h2 id="泛型"><a class="markdownIt-Anchor" href="#泛型"></a> 泛型</h2>
+<p><strong>泛型类：</strong></p>
+<div class="rbcode">
+<pre><code class="highlight java">修饰符 class 类名&lt;类型<span class="number">1</span>, 类型<span class="number">2</span>, ...&gt; &#123;
+    ...
+&#125;</code></pre>
+</div>
+<p><strong>泛型接口：</strong></p>
+<div class="rbcode">
+<pre><code class="highlight java">修饰符 interface 接口名&lt;类型<span class="number">1</span>, 类型<span class="number">2</span>, ...&gt; &#123;
+    ...
+&#125;</code></pre>
+</div>
+<p><strong>泛型方法</strong>：</p>
+<div class="rbcode">
+<pre><code class="highlight java">修饰符 &lt;类型<span class="number">1</span>, 类型<span class="number">2</span>, ...&gt; 返回值类型 方法名(形参列表) &#123;
+    ...
+&#125;</code></pre>
+</div>
+<p>显式指定类型参数： <code>&lt;类型1, 类型2, ...&gt;方法名(形参列表)</code>。</p>
+<p><strong>类型变量限定：</strong></p>
+<p>使用 <code>&lt;T extends ...&gt;</code> 限定类型变量，限定类型用 <code>&amp;</code> 分隔。</p>
+<p>限定可以有多个接口，但只能有一个类，且必须是限定列表中的第一个。</p>
+<p>类型擦除后，原始类型为第一个限定。为提高效率，应将标记接口（没有方法的接口）放在限定列表的末尾。</p>
+<p><strong>通配符类型：</strong></p>
+<ul>
+<li>任意类型：<code>&lt;?&gt;</code></li>
+<li>子类型限定：<code>&lt;? extends ...&gt;</code>
+<ul>
+<li>set 方法：只能传入子类型的子类型，范围不确定，无法使用</li>
+<li>get 方法：返回值是 <code>?</code> 的子类型，可用 <code>?</code> 及其超类型接收</li>
+</ul>
+</li>
+<li>超类型限定：<code>&lt;? super ...&gt;</code>
+<ul>
+<li>set 方法：可传递 <code>?</code> 超类型的子类型，故 <code>?</code> 的子类型一定能传递</li>
+<li>get 方法：返回值是 <code>?</code> 的超类型，范围不确定，只能用 <code>Object</code> 接收</li>
+</ul>
+</li>
+</ul>
+<p><strong>泛型限制：</strong></p>
+<p>大多数限制都是由类型擦除引起的。</p>
+<ul>
+<li>不能用基本类型作为类型参数</li>
+<li><code>instanceof</code> 只检查原始类型是否匹配，对泛型类型使用可能得到编译错误或警告</li>
+<li>不能创建参数化类型（<code>class&lt;T&gt;</code>）的数组</li>
+<li>不能实例化类型变量（<code>new T()</code>）</li>
+<li>不能构造泛型数组（<code>new T[n]</code>）</li>
+<li>不能在静态方法或字段中使用类型变量</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>
