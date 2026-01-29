@@ -111,6 +111,182 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo 模仿 OI Wiki 折叠标签样式</title>
+    <url>/2025/08/09/Hexo-%E6%A8%A1%E4%BB%BF-OI-Wiki-%E6%8A%98%E5%8F%A0%E6%A0%87%E7%AD%BE%E6%A0%B7%E5%BC%8F/</url>
+    <content><![CDATA[<p>在 Hexo 上写文章时常常发现代码太长想要折叠，但 NexT 主题自带的折叠功能感觉太丑。</p>
+<p>一番搜索后发现<a href="https://www.cnblogs.com/TH911/p/18994526">一篇文章</a>复现了 Oi Wiki 的折叠样式，结果又发现 Oi Wiki 的 css 太长不想看，<br />
+于是决定自己实现类似的样式。</p>
+<span id="more"></span>
+<details class="mkmt mt-warning" open>
+<summary>注意</summary>
+<div>
+以下内容只适用于 Hexo NexT 8.0。
+</div>
+</details>
+<p>NexT 8.0 支持将自定义样式放在独立的文件中。</p>
+<p>找到 NexT <strong>主题配置文件</strong> <code>_config.yml</code>，找到以下内容：</p>
+<div class="rbcode">
+<pre><code class="highlight yml"><span class="comment"># Define custom file paths.</span>
+<span class="comment"># Create your custom files in site directory `source/_data` and uncomment needed files below.</span>
+<span class="attr">custom_file_path:</span>
+  <span class="comment">#head: source/_data/head.njk</span>
+  <span class="comment">#header: source/_data/header.njk</span>
+  <span class="comment">#sidebar: source/_data/sidebar.njk</span>
+  <span class="comment">#postMeta: source/_data/post-meta.njk</span>
+  <span class="comment">#postBodyStart: source/_data/post-body-start.njk</span>
+  <span class="comment">#postBodyEnd: source/_data/post-body-end.njk</span>
+  <span class="comment">#footer: source/_data/footer.njk</span>
+  <span class="comment">#bodyEnd: source/_data/body-end.njk</span>
+  <span class="comment">#variable: source/_data/variables.styl</span>
+  <span class="comment">#mixin: source/_data/mixins.styl</span>
+  <span class="attr">style:</span> <span class="string">source/_data/styles.styl</span></code></pre>
+</div>
+<p>将其中 <code>style</code> 前面的注释符号删掉，如上面所示。</p>
+<p>在<strong>站点文件夹</strong>下创建文件 <code>source/_data/styles.styl</code>，在其中添加如下内容：</p>
+<details class="mkmt mt-code">
+<summary>source/_data/styles.styl</summary>
+<div>
+<pre><code class="highlight yml"><span class="string">details.mkmt</span>
+  <span class="string">border</span> <span class="string">1px</span> <span class="string">solid</span> <span class="comment">#ddd</span>
+  <span class="string">border-radius</span> <span class="string">6px</span>
+  <span class="string">margin</span> <span class="string">1em</span> <span class="number">0</span>
+  <span class="string">background</span> <span class="comment">#fff</span>
+  <span class="string">overflow</span> <span class="string">hidden</span>
+  <span class="string">transition</span> <span class="string">all</span> <span class="number">0.</span><span class="string">2s</span> <span class="string">ease</span>
+
+<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">summary</span>
+  <span class="string">display</span> <span class="string">flex</span>
+  <span class="string">align-items</span> <span class="string">center</span>
+  <span class="string">gap</span> <span class="number">0.</span><span class="string">5em</span>
+  <span class="string">padding</span> <span class="number">0.</span><span class="string">6em</span> <span class="string">1em</span>
+  <span class="string">font-weight</span> <span class="number">600</span>
+  <span class="string">cursor</span> <span class="string">pointer</span>
+  <span class="string">list-style</span> <span class="string">none</span>
+  <span class="string">position</span> <span class="string">relative</span>
+  <span class="string">color</span> <span class="string">inherit</span>
+
+<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">summary::after</span>
+  <span class="string">content</span> <span class="string">&quot;&gt;&quot;</span>
+  <span class="string">position</span> <span class="string">absolute</span>
+  <span class="string">right</span> <span class="string">1em</span>
+  <span class="string">transition</span> <span class="string">transform</span> <span class="number">0.</span><span class="string">2s</span> <span class="string">ease</span>
+
+<span class="string">details.mkmt[open]</span> <span class="string">&gt;</span> <span class="string">summary::after</span>
+  <span class="string">transform</span> <span class="string">rotate(90deg)</span>
+
+<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">*:not(summary)</span>
+  <span class="string">margin</span> <span class="number">0</span>
+  <span class="string">padding</span> <span class="number">0.</span><span class="string">6em</span> <span class="number">0.</span><span class="string">8em</span>
+
+<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">summary::before</span>
+  <span class="string">content</span> <span class="string">&#x27;&#x27;</span>
+  <span class="string">display</span> <span class="string">inline-block</span>
+  <span class="string">width</span> <span class="number">1.</span><span class="string">2em</span>
+  <span class="string">height</span> <span class="number">1.</span><span class="string">2em</span>
+  <span class="string">margin-right</span> <span class="number">0.</span><span class="string">4em</span>
+  <span class="string">background-repeat</span> <span class="literal">no</span><span class="string">-repeat</span>
+  <span class="string">background-position</span> <span class="string">center</span>
+  <span class="string">background-size</span> <span class="string">contain</span>
+
+<span class="string">details.mkmt.mt-note</span> <span class="string">&gt;</span> <span class="string">summary::before</span>
+  <span class="string">background-image</span> <span class="string">url(&quot;data:image/svg+xml;utf8,&lt;svg</span> <span class="string">xmlns=&#x27;http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%23588bff&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;circle cx=&#x27;</span><span class="number">12</span><span class="string">&#x27; cy=&#x27;</span><span class="number">12</span><span class="string">&#x27; r=&#x27;</span><span class="number">10</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">8</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12</span><span class="string">&#x27; y2=&#x27;</span><span class="number">8</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">12</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12</span><span class="string">&#x27; y2=&#x27;</span><span class="number">16</span><span class="string">&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
+<span class="string">details.mkmt.mt-note</span>
+<span class="string">  border 1.5px solid #588bff</span>
+<span class="string">  background #fff</span>
+<span class="string">details.mkmt.mt-note &gt; summary</span>
+<span class="string">  background #eef3ff</span>
+<span class="string">  color #588bff</span>
+<span class="string"></span>
+<span class="string">details.mkmt.mt-warning &gt; summary::before</span>
+<span class="string">  background-image url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=&#x27;</span><span class="string">http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%23f69202&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;path d=&#x27;</span><span class="string">M10.29</span> <span class="number">3.</span><span class="string">86L1.82</span> <span class="string">18a2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1.71</span> <span class="string">3h16.94a2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1.71</span><span class="string">-3L13.71</span> <span class="number">3.</span><span class="string">86a2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span><span class="number">-3.42</span> <span class="string">0z&#x27;/&gt;&lt;line</span> <span class="string">x1=&#x27;12&#x27;</span> <span class="string">y1=&#x27;9&#x27;</span> <span class="string">x2=&#x27;12&#x27;</span> <span class="string">y2=&#x27;13&#x27;/&gt;&lt;line</span> <span class="string">x1=&#x27;12&#x27;</span> <span class="string">y1=&#x27;17&#x27;</span> <span class="string">x2=&#x27;12.01&#x27;</span> <span class="string">y2=&#x27;17&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
+<span class="string">details.mkmt.mt-warning</span>
+  <span class="string">border</span> <span class="number">1.</span><span class="string">5px</span> <span class="string">solid</span> <span class="comment">#f69202</span>
+  <span class="string">background</span> <span class="comment">#fff</span>
+<span class="string">details.mkmt.mt-warning</span> <span class="string">&gt;</span> <span class="string">summary</span>
+  <span class="string">background</span> <span class="comment">#fef4e5</span>
+  <span class="string">color</span> <span class="comment">#f69202</span>
+
+<span class="string">details.mkmt.mt-danger</span> <span class="string">&gt;</span> <span class="string">summary::before</span>
+  <span class="string">background-image</span> <span class="string">url(&quot;data:image/svg+xml;utf8,&lt;svg</span> <span class="string">xmlns=&#x27;http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%23f45555&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;circle cx=&#x27;</span><span class="number">12</span><span class="string">&#x27; cy=&#x27;</span><span class="number">12</span><span class="string">&#x27; r=&#x27;</span><span class="number">10</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">8</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12</span><span class="string">&#x27; y2=&#x27;</span><span class="number">12</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">16</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12.01</span><span class="string">&#x27; y2=&#x27;</span><span class="number">16</span><span class="string">&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
+<span class="string">details.mkmt.mt-danger</span>
+<span class="string">  border 1.5px solid #f45555</span>
+<span class="string">  background #fff</span>
+<span class="string">details.mkmt.mt-danger &gt; summary</span>
+<span class="string">  background #feeeee</span>
+<span class="string">  color #f45555</span>
+<span class="string"></span>
+<span class="string">pre</span>
+<span class="string">  margin 0</span>
+<span class="string"></span>
+<span class="string">details.mkmt.mt-code &gt; summary::before</span>
+<span class="string">  background-image url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=&#x27;</span><span class="string">http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%237f50ff&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;path d=&#x27;</span><span class="string">M7</span> <span class="string">8L3</span> <span class="string">12L7</span> <span class="number">16</span><span class="string">&#x27;/&gt; &lt;path d=&#x27;</span><span class="string">M17</span> <span class="string">16L21</span> <span class="string">12L17</span> <span class="number">8</span><span class="string">&#x27;/&gt; &lt;path d=&#x27;</span><span class="string">M9</span> <span class="number">19.</span><span class="string">5L14.5</span> <span class="number">5</span><span class="string">&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
+<span class="string">details.mkmt.mt-code</span>
+<span class="string">  border 1.5px solid #7f50ff</span>
+<span class="string">  background #fff</span>
+<span class="string">details.mkmt.mt-code &gt; summary</span>
+<span class="string">  background #f2edff</span>
+<span class="string">  color #7f50ff</span></code></pre>
+</div>
+</details>
+<p>使用示例：</p>
+<div class="rbcode">
+<pre><code class="highlight markdown"><span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-note&quot;</span> <span class="attr">open</span>&gt;</span></span>
+<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>提示<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
+
+这是提示类型的折叠框内容。
+
+<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span>
+
+<span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-warning&quot;</span> <span class="attr">open</span>&gt;</span></span>
+<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>警告<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
+
+这是警告类型的折叠框内容。
+
+<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span>
+
+<span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-danger&quot;</span> <span class="attr">open</span>&gt;</span></span>
+<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>危险<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
+
+这是危险类型的折叠框内容。
+
+<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span>
+
+
+<span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-code&quot;</span> <span class="attr">open</span>&gt;</span></span>
+<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>代码<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
+
+<span class="code">```text</span>
+<span class="code">This is a sample snippet of code.</span>
+<span class="code">```</span>
+
+<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span></code></pre>
+</div>
+<p>效果如下：</p>
+<details class="mkmt mt-note" open>
+<summary>提示</summary>
+<p>这是提示类型的折叠框内容。</p>
+</details>
+<details class="mkmt mt-warning" open>
+<summary>警告</summary>
+<p>这是警告类型的折叠框内容。</p>
+</details>
+<details class="mkmt mt-danger" open>
+<summary>危险</summary>
+<p>这是危险类型的折叠框内容。</p>
+</details>
+<details class="mkmt mt-code" open>
+<summary>代码</summary>
+<pre><code class="highlight text">This is a sample snippet of code.</code></pre>
+</details>]]></content>
+      <categories>
+        <category>Hexo 博客搭建</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Stylus</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Codeforces 2074D Counting Points</title>
     <url>/2025/08/14/Codeforces-2074D-Counting-Points/</url>
     <content><![CDATA[<h1 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h1>
@@ -413,182 +589,6 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
         <tag>算法</tag>
         <tag>C++</tag>
         <tag>Codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo 模仿 OI Wiki 折叠标签样式</title>
-    <url>/2025/08/09/Hexo-%E6%A8%A1%E4%BB%BF-OI-Wiki-%E6%8A%98%E5%8F%A0%E6%A0%87%E7%AD%BE%E6%A0%B7%E5%BC%8F/</url>
-    <content><![CDATA[<p>在 Hexo 上写文章时常常发现代码太长想要折叠，但 NexT 主题自带的折叠功能感觉太丑。</p>
-<p>一番搜索后发现<a href="https://www.cnblogs.com/TH911/p/18994526">一篇文章</a>复现了 Oi Wiki 的折叠样式，结果又发现 Oi Wiki 的 css 太长不想看，<br />
-于是决定自己实现类似的样式。</p>
-<span id="more"></span>
-<details class="mkmt mt-warning" open>
-<summary>注意</summary>
-<div>
-以下内容只适用于 Hexo NexT 8.0。
-</div>
-</details>
-<p>NexT 8.0 支持将自定义样式放在独立的文件中。</p>
-<p>找到 NexT <strong>主题配置文件</strong> <code>_config.yml</code>，找到以下内容：</p>
-<div class="rbcode">
-<pre><code class="highlight yml"><span class="comment"># Define custom file paths.</span>
-<span class="comment"># Create your custom files in site directory `source/_data` and uncomment needed files below.</span>
-<span class="attr">custom_file_path:</span>
-  <span class="comment">#head: source/_data/head.njk</span>
-  <span class="comment">#header: source/_data/header.njk</span>
-  <span class="comment">#sidebar: source/_data/sidebar.njk</span>
-  <span class="comment">#postMeta: source/_data/post-meta.njk</span>
-  <span class="comment">#postBodyStart: source/_data/post-body-start.njk</span>
-  <span class="comment">#postBodyEnd: source/_data/post-body-end.njk</span>
-  <span class="comment">#footer: source/_data/footer.njk</span>
-  <span class="comment">#bodyEnd: source/_data/body-end.njk</span>
-  <span class="comment">#variable: source/_data/variables.styl</span>
-  <span class="comment">#mixin: source/_data/mixins.styl</span>
-  <span class="attr">style:</span> <span class="string">source/_data/styles.styl</span></code></pre>
-</div>
-<p>将其中 <code>style</code> 前面的注释符号删掉，如上面所示。</p>
-<p>在<strong>站点文件夹</strong>下创建文件 <code>source/_data/styles.styl</code>，在其中添加如下内容：</p>
-<details class="mkmt mt-code">
-<summary>source/_data/styles.styl</summary>
-<div>
-<pre><code class="highlight yml"><span class="string">details.mkmt</span>
-  <span class="string">border</span> <span class="string">1px</span> <span class="string">solid</span> <span class="comment">#ddd</span>
-  <span class="string">border-radius</span> <span class="string">6px</span>
-  <span class="string">margin</span> <span class="string">1em</span> <span class="number">0</span>
-  <span class="string">background</span> <span class="comment">#fff</span>
-  <span class="string">overflow</span> <span class="string">hidden</span>
-  <span class="string">transition</span> <span class="string">all</span> <span class="number">0.</span><span class="string">2s</span> <span class="string">ease</span>
-
-<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">summary</span>
-  <span class="string">display</span> <span class="string">flex</span>
-  <span class="string">align-items</span> <span class="string">center</span>
-  <span class="string">gap</span> <span class="number">0.</span><span class="string">5em</span>
-  <span class="string">padding</span> <span class="number">0.</span><span class="string">6em</span> <span class="string">1em</span>
-  <span class="string">font-weight</span> <span class="number">600</span>
-  <span class="string">cursor</span> <span class="string">pointer</span>
-  <span class="string">list-style</span> <span class="string">none</span>
-  <span class="string">position</span> <span class="string">relative</span>
-  <span class="string">color</span> <span class="string">inherit</span>
-
-<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">summary::after</span>
-  <span class="string">content</span> <span class="string">&quot;&gt;&quot;</span>
-  <span class="string">position</span> <span class="string">absolute</span>
-  <span class="string">right</span> <span class="string">1em</span>
-  <span class="string">transition</span> <span class="string">transform</span> <span class="number">0.</span><span class="string">2s</span> <span class="string">ease</span>
-
-<span class="string">details.mkmt[open]</span> <span class="string">&gt;</span> <span class="string">summary::after</span>
-  <span class="string">transform</span> <span class="string">rotate(90deg)</span>
-
-<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">*:not(summary)</span>
-  <span class="string">margin</span> <span class="number">0</span>
-  <span class="string">padding</span> <span class="number">0.</span><span class="string">6em</span> <span class="number">0.</span><span class="string">8em</span>
-
-<span class="string">details.mkmt</span> <span class="string">&gt;</span> <span class="string">summary::before</span>
-  <span class="string">content</span> <span class="string">&#x27;&#x27;</span>
-  <span class="string">display</span> <span class="string">inline-block</span>
-  <span class="string">width</span> <span class="number">1.</span><span class="string">2em</span>
-  <span class="string">height</span> <span class="number">1.</span><span class="string">2em</span>
-  <span class="string">margin-right</span> <span class="number">0.</span><span class="string">4em</span>
-  <span class="string">background-repeat</span> <span class="literal">no</span><span class="string">-repeat</span>
-  <span class="string">background-position</span> <span class="string">center</span>
-  <span class="string">background-size</span> <span class="string">contain</span>
-
-<span class="string">details.mkmt.mt-note</span> <span class="string">&gt;</span> <span class="string">summary::before</span>
-  <span class="string">background-image</span> <span class="string">url(&quot;data:image/svg+xml;utf8,&lt;svg</span> <span class="string">xmlns=&#x27;http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%23588bff&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;circle cx=&#x27;</span><span class="number">12</span><span class="string">&#x27; cy=&#x27;</span><span class="number">12</span><span class="string">&#x27; r=&#x27;</span><span class="number">10</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">8</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12</span><span class="string">&#x27; y2=&#x27;</span><span class="number">8</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">12</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12</span><span class="string">&#x27; y2=&#x27;</span><span class="number">16</span><span class="string">&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
-<span class="string">details.mkmt.mt-note</span>
-<span class="string">  border 1.5px solid #588bff</span>
-<span class="string">  background #fff</span>
-<span class="string">details.mkmt.mt-note &gt; summary</span>
-<span class="string">  background #eef3ff</span>
-<span class="string">  color #588bff</span>
-<span class="string"></span>
-<span class="string">details.mkmt.mt-warning &gt; summary::before</span>
-<span class="string">  background-image url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=&#x27;</span><span class="string">http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%23f69202&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;path d=&#x27;</span><span class="string">M10.29</span> <span class="number">3.</span><span class="string">86L1.82</span> <span class="string">18a2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1.71</span> <span class="string">3h16.94a2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1.71</span><span class="string">-3L13.71</span> <span class="number">3.</span><span class="string">86a2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span><span class="number">-3.42</span> <span class="string">0z&#x27;/&gt;&lt;line</span> <span class="string">x1=&#x27;12&#x27;</span> <span class="string">y1=&#x27;9&#x27;</span> <span class="string">x2=&#x27;12&#x27;</span> <span class="string">y2=&#x27;13&#x27;/&gt;&lt;line</span> <span class="string">x1=&#x27;12&#x27;</span> <span class="string">y1=&#x27;17&#x27;</span> <span class="string">x2=&#x27;12.01&#x27;</span> <span class="string">y2=&#x27;17&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
-<span class="string">details.mkmt.mt-warning</span>
-  <span class="string">border</span> <span class="number">1.</span><span class="string">5px</span> <span class="string">solid</span> <span class="comment">#f69202</span>
-  <span class="string">background</span> <span class="comment">#fff</span>
-<span class="string">details.mkmt.mt-warning</span> <span class="string">&gt;</span> <span class="string">summary</span>
-  <span class="string">background</span> <span class="comment">#fef4e5</span>
-  <span class="string">color</span> <span class="comment">#f69202</span>
-
-<span class="string">details.mkmt.mt-danger</span> <span class="string">&gt;</span> <span class="string">summary::before</span>
-  <span class="string">background-image</span> <span class="string">url(&quot;data:image/svg+xml;utf8,&lt;svg</span> <span class="string">xmlns=&#x27;http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%23f45555&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;circle cx=&#x27;</span><span class="number">12</span><span class="string">&#x27; cy=&#x27;</span><span class="number">12</span><span class="string">&#x27; r=&#x27;</span><span class="number">10</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">8</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12</span><span class="string">&#x27; y2=&#x27;</span><span class="number">12</span><span class="string">&#x27;/&gt;&lt;line x1=&#x27;</span><span class="number">12</span><span class="string">&#x27; y1=&#x27;</span><span class="number">16</span><span class="string">&#x27; x2=&#x27;</span><span class="number">12.01</span><span class="string">&#x27; y2=&#x27;</span><span class="number">16</span><span class="string">&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
-<span class="string">details.mkmt.mt-danger</span>
-<span class="string">  border 1.5px solid #f45555</span>
-<span class="string">  background #fff</span>
-<span class="string">details.mkmt.mt-danger &gt; summary</span>
-<span class="string">  background #feeeee</span>
-<span class="string">  color #f45555</span>
-<span class="string"></span>
-<span class="string">pre</span>
-<span class="string">  margin 0</span>
-<span class="string"></span>
-<span class="string">details.mkmt.mt-code &gt; summary::before</span>
-<span class="string">  background-image url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=&#x27;</span><span class="string">http://www.w3.org/2000/svg&#x27;</span> <span class="string">fill=&#x27;none&#x27;</span> <span class="string">stroke=&#x27;%237f50ff&#x27;</span> <span class="string">stroke-width=&#x27;2&#x27;</span> <span class="string">stroke-linecap=&#x27;round&#x27;</span> <span class="string">stroke-linejoin=&#x27;round&#x27;</span> <span class="string">viewBox=&#x27;0</span> <span class="number">0</span> <span class="number">24</span> <span class="number">24</span><span class="string">&#x27;&gt;&lt;path d=&#x27;</span><span class="string">M7</span> <span class="string">8L3</span> <span class="string">12L7</span> <span class="number">16</span><span class="string">&#x27;/&gt; &lt;path d=&#x27;</span><span class="string">M17</span> <span class="string">16L21</span> <span class="string">12L17</span> <span class="number">8</span><span class="string">&#x27;/&gt; &lt;path d=&#x27;</span><span class="string">M9</span> <span class="number">19.</span><span class="string">5L14.5</span> <span class="number">5</span><span class="string">&#x27;/&gt;&lt;/svg&gt;&quot;)</span>
-<span class="string">details.mkmt.mt-code</span>
-<span class="string">  border 1.5px solid #7f50ff</span>
-<span class="string">  background #fff</span>
-<span class="string">details.mkmt.mt-code &gt; summary</span>
-<span class="string">  background #f2edff</span>
-<span class="string">  color #7f50ff</span></code></pre>
-</div>
-</details>
-<p>使用示例：</p>
-<div class="rbcode">
-<pre><code class="highlight markdown"><span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-note&quot;</span> <span class="attr">open</span>&gt;</span></span>
-<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>提示<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
-
-这是提示类型的折叠框内容。
-
-<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span>
-
-<span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-warning&quot;</span> <span class="attr">open</span>&gt;</span></span>
-<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>警告<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
-
-这是警告类型的折叠框内容。
-
-<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span>
-
-<span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-danger&quot;</span> <span class="attr">open</span>&gt;</span></span>
-<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>危险<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
-
-这是危险类型的折叠框内容。
-
-<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span>
-
-
-<span class="language-xml"><span class="tag">&lt;<span class="name">details</span> <span class="attr">class</span>=<span class="string">&quot;mkmt mt-code &quot;</span> <span class="attr">open</span>&gt;</span></span>
-<span class="language-xml"><span class="tag">&lt;<span class="name">summary</span>&gt;</span></span>代码<span class="language-xml"><span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span>
-
-<span class="code">```text</span>
-<span class="code">This is a sample snippet of code.</span>
-<span class="code">```</span>
-
-<span class="language-xml"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span></code></pre>
-</div>
-<p>效果如下：</p>
-<details class="mkmt mt-note" open>
-<summary>提示</summary>
-<p>这是提示类型的折叠框内容。</p>
-</details>
-<details class="mkmt mt-warning" open>
-<summary>警告</summary>
-<p>这是警告类型的折叠框内容。</p>
-</details>
-<details class="mkmt mt-danger" open>
-<summary>危险</summary>
-<p>这是危险类型的折叠框内容。</p>
-</details>
-<details class="mkmt mt-code " open>
-<summary>代码</summary>
-<pre><code class="highlight text">This is a sample snippet of code.</code></pre>
-</details>]]></content>
-      <categories>
-        <category>Hexo 博客搭建</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Stylus</tag>
       </tags>
   </entry>
   <entry>
@@ -1409,7 +1409,8 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <li><code>int object.ordinal()</code>：枚举对象索引</li>
 </ul>
 <h3 id="抽象枚举"><a class="markdownIt-Anchor" href="#抽象枚举"></a> 抽象枚举</h3>
-<div class="rbcode">
+<details class="mkmt mt-code" open>
+<summary>示例</summary>
 <pre><code class="highlight java"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Color</span> &#123;
     R(<span class="string">&quot;Red&quot;</span>) &#123;
         <span class="meta">@Override</span>
@@ -1446,7 +1447,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
         <span class="built_in">this</span>.name = name;
     &#125;
 &#125;</code></pre>
-</div>
+</details>
 <h2 id="泛型"><a class="markdownIt-Anchor" href="#泛型"></a> 泛型</h2>
 <p><strong>泛型类：</strong></p>
 <div class="rbcode">
