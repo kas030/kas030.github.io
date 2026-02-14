@@ -145,7 +145,6 @@
 <p>在<strong>站点文件夹</strong>下创建文件 <code>source/_data/styles.styl</code>，在其中添加如下内容：</p>
 <details class="mkmt mt-code">
 <summary>source/_data/styles.styl</summary>
-<div>
 <pre><code class="highlight yml"><span class="string">details.mkmt</span>
   <span class="string">border</span> <span class="string">1px</span> <span class="string">solid</span> <span class="comment">#ddd</span>
   <span class="string">border-radius</span> <span class="string">6px</span>
@@ -226,7 +225,6 @@
 <span class="string">details.mkmt.mt-code &gt; summary</span>
 <span class="string">  background #f2edff</span>
 <span class="string">  color #7f50ff</span></code></pre>
-</div>
 </details>
 <p>使用示例：</p>
 <div class="rbcode">
@@ -654,14 +652,20 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <h1 id="语法基础"><a class="markdownIt-Anchor" href="#语法基础"></a> 语法基础</h1>
 <h2 id="注释"><a class="markdownIt-Anchor" href="#注释"></a> 注释</h2>
 <ul>
-<li>单行注释 <code>//</code></li>
-<li>多行注释<div class="rbcode">
+<li>
+<p>单行注释 <code>//</code></p>
+</li>
+<li>
+<p>多行注释</p>
+<div class="rbcode">
 <pre><code class="highlight java"><span class="comment">/*</span>
 <span class="comment">...</span>
 <span class="comment">*/</span></code></pre>
 </div>
 </li>
-<li>文档注释<div class="rbcode">
+<li>
+<p>文档注释</p>
+<div class="rbcode">
 <pre><code class="highlight java"><span class="comment">/**</span>
 <span class="comment"> * ...</span>
 <span class="comment"> */</span></code></pre>
@@ -1141,7 +1145,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
     </tr>
 </table>
 <h3 id="localdate-localtime-和-localdatetime"><a class="markdownIt-Anchor" href="#localdate-localtime-和-localdatetime"></a> LocalDate、LocalTime 和 LocalDateTime</h3>
-<p>**获取对象：**调用静态方法 <code>now()</code> 方法获取当前时间对应的对象</p>
+<p><strong>获取对象：</strong> 调用静态方法 <code>now()</code> 方法获取当前时间对应的对象</p>
 <p><strong>用法：</strong></p>
 <p><strong>LocalDate：</strong></p>
 <ul>
@@ -1188,7 +1192,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <li>获取 Java 支持的全部时区 Id：<code>static Set&lt;String&gt; getAvailableZoneIds()</code></li>
 <li>把某个时区 Id 封装成 ZoneId 对象：<code>static ZoneId of(String zoneId)</code></li>
 </ul>
-<p>**ZoneDateTime：**带时区的时间</p>
+<p><strong>ZoneDateTime：</strong> 带时区的时间</p>
 <ul>
 <li>获取某个时区的 ZoneDateTime 对象：<code>static ZoneDateTime now(ZoneId zone)</code></li>
 <li>获取系统默认时区的 ZoneDateTime 对象：<code>static ZoneDateTime now()</code></li>
@@ -1498,6 +1502,55 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <li>不能构造泛型数组（<code>new T[n]</code>）</li>
 <li>不能在静态方法或字段中使用类型变量</li>
 </ul>
+<h1 id="jdk8-新特性"><a class="markdownIt-Anchor" href="#jdk8-新特性"></a> JDK8 新特性</h1>
+<h2 id="lambda-表达式"><a class="markdownIt-Anchor" href="#lambda-表达式"></a> Lambda 表达式</h2>
+<p><strong>作用：</strong></p>
+<p>简化函数式接口匿名内部类的代码写法</p>
+<blockquote>
+<p><em>函数式接口</em>：只有一个抽象方法的接口<br />
+通常加 <code>@FunctionalInterface</code> 注解，有该注解的必定是函数式接口</p>
+</blockquote>
+<p><strong>格式：</strong></p>
+<div class="rbcode">
+<pre><code class="highlight java">(被重写方法的形参列表) -&gt; &#123;
+    被重写方法的方法体代码;
+&#125;</code></pre>
+</div>
+<p><strong>省略写法：</strong></p>
+<ul>
+<li>参数类型可以不写</li>
+<li>如果只有一个参数，参数类型可以省略，同时 <code>()</code> 也可以省略</li>
+<li>如果方法体代码只有一行，可以省略 <code>&#123;&#125;</code>，同时要省略分号；如果这行代码是 <code>return</code> 语句，也必须去掉 <code>return</code> 不写</li>
+</ul>
+<h2 id="方法引用"><a class="markdownIt-Anchor" href="#方法引用"></a> 方法引用</h2>
+<h3 id="静态方法引用"><a class="markdownIt-Anchor" href="#静态方法引用"></a> 静态方法引用</h3>
+<p>如果一个 Lambda 表达式里只是调用一个静态方法，并且前后参数形式一致，就可以使用静态方法引用。</p>
+<p>格式：<code>类名::静态方法</code></p>
+<h3 id="实例方法引用"><a class="markdownIt-Anchor" href="#实例方法引用"></a> 实例方法引用</h3>
+<p>如果一个 Lambda 表达式里只是调用一个实例方法，并且千后参数形式一致，就可以使用实例方法引用。</p>
+<p>格式：<code>对象名::实例方法</code></p>
+<h3 id="特定类型方法引用"><a class="markdownIt-Anchor" href="#特定类型方法引用"></a> 特定类型方法引用</h3>
+<p>如果一个 Lambda 表达式里只是调用一个实例方法，并且前面参数列表中的第一个参数是作为方法的主调，后面的所有参数都是作为该方法的入参，则可以使用特定类型方法引用。</p>
+<p>格式：<code>类型::方法</code></p>
+<details class="mkmt mt-code" open>
+<summary>示例：忽略字符串大小写排序</summary>
+<pre><code class="highlight java"><span class="comment">// 原代码</span>
+Arrays.sort(names, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;String&gt;() &#123;
+    <span class="meta">@Override</span>
+    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(String o1, String o2)</span> &#123;
+        <span class="keyword">return</span> o1.compareToIgnoreCase(o2);
+    &#125; 
+&#125;);
+
+<span class="comment">// 简化</span>
+Arrays.sort(names, (o1, o2) -&gt; o1.compareToIgnoreCase(o2));
+
+<span class="comment">// 特定类型方法引用</span>
+Arrays.sort(names, String::compareToIgnoreCase);</code></pre>
+</details>
+<h3 id="构造器引用"><a class="markdownIt-Anchor" href="#构造器引用"></a> 构造器引用</h3>
+<p>如果一个 Lambda 表达式里只是在创建对象，并且前后参数情况一致，就可以使用构造器引用。</p>
+<p>格式：<code>类名::new</code></p>
 ]]></content>
       <categories>
         <category>编程语言</category>
