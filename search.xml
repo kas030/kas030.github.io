@@ -1554,6 +1554,272 @@ Arrays.sort(names, String::compareToIgnoreCase);</code></pre>
 ]]></content>
       <categories>
         <category>编程语言</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java正则表达式</title>
+    <url>/2026/02/14/Java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<p>String 提供了以下方法进行正则表达式匹配：</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">matches</span><span class="params">(String regex)</span>;</code></pre>
+</div>
+<h1 id="书写规则"><a class="markdownIt-Anchor" href="#书写规则"></a> 书写规则</h1>
+<h2 id="字符类"><a class="markdownIt-Anchor" href="#字符类"></a> 字符类</h2>
+<p>匹配单个字符。</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>匹配内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[abc]</code></td>
+<td>a、b或c</td>
+</tr>
+<tr>
+<td><code>[^abc]</code></td>
+<td>除了a、b或c（补）</td>
+</tr>
+<tr>
+<td><code>[a-zA-Z]</code></td>
+<td>a到z或A到Z（范围）</td>
+</tr>
+<tr>
+<td><code>[a-d[m-p]]</code></td>
+<td>a到d或m到p（并）</td>
+</tr>
+<tr>
+<td><code>[a-z&amp;&amp;[def]]</code></td>
+<td>d、e或f（交）</td>
+</tr>
+<tr>
+<td><code>[a-z&amp;&amp;[^bc]]</code></td>
+<td>a到z除b和c（减）</td>
+</tr>
+</tbody>
+</table>
+<span id="more"></span>
+<h2 id="预定义字符"><a class="markdownIt-Anchor" href="#预定义字符"></a> 预定义字符</h2>
+<p>匹配单个字符。</p>
+<table>
+<thead>
+<tr>
+<th>预定义字符</th>
+<th>匹配内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>任何字符</td>
+</tr>
+<tr>
+<td><code>\d</code></td>
+<td>数字</td>
+</tr>
+<tr>
+<td><code>\D</code></td>
+<td>非数字</td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>空白字符</td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>非空白字符</td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>单词字符*</td>
+</tr>
+<tr>
+<td><code>\W</code></td>
+<td>非单词字符</td>
+</tr>
+</tbody>
+</table>
+<p><em>*单词字符：<code>[a-zA-Z_0-9]</code></em></p>
+<h2 id="数量词"><a class="markdownIt-Anchor" href="#数量词"></a> 数量词</h2>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>匹配内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X?</code></td>
+<td>X，0次或1次</td>
+</tr>
+<tr>
+<td><code>X*</code></td>
+<td>X，0次或多次</td>
+</tr>
+<tr>
+<td><code>X+</code></td>
+<td>X，1次或多次</td>
+</tr>
+<tr>
+<td><code>X&#123;n&#125;</code></td>
+<td>X，n次</td>
+</tr>
+<tr>
+<td><code>X&#123;n,&#125;</code></td>
+<td>X，至少n次</td>
+</tr>
+<tr>
+<td><code>X&#123;n,m&#125;</code></td>
+<td>X，至少n次，不超过m次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他符号"><a class="markdownIt-Anchor" href="#其他符号"></a> 其他符号</h2>
+<ul>
+<li><code>(?i)</code>：忽略大小写</li>
+<li><code>|</code>：或</li>
+<li><code>()</code>：分组</li>
+</ul>
+<h1 id="应用"><a class="markdownIt-Anchor" href="#应用"></a> 应用</h1>
+<h2 id="内容查找"><a class="markdownIt-Anchor" href="#内容查找"></a> 内容查找</h2>
+<details class="mkmt mt-code" open>
+<summary>案例</summary>
+<pre><code class="highlight java"><span class="type">String</span> <span class="variable">data</span> <span class="operator">=</span> ...;
+<span class="type">String</span> <span class="variable">regex</span> <span class="operator">=</span> ...;
+<span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(regex);
+<span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(data);
+<span class="keyword">while</span>(matcher.find()) &#123;
+    System.out.println(matcher.group());
+&#125;</code></pre>
+</details>
+<h2 id="搜索替换-分割内容"><a class="markdownIt-Anchor" href="#搜索替换-分割内容"></a> 搜索替换、分割内容</h2>
+<p>String 提供了以下方法用于替换、分割内容：</p>
+<ul>
+<li><code>public String replaceAll(String regex, String newStr)</code>：按照正则表达式匹配的内容进行替换</li>
+<li><code>public String[] split(String regex)</code>：按照正则表达式匹配的内容进行分割字符串，返回字符串数组</li>
+</ul>
+<details class="mkmt mt-code" open>
+<summary>案例：将重复字符只保留一个</summary>
+<pre><code class="highlight java"><span class="type">String</span> <span class="variable">st</span> <span class="operator">=</span> <span class="string">&quot;aaabbccccc&quot;</span>;
+st = st.replaceAll(<span class="string">&quot;(.)\\1+&quot;</span>, <span class="string">&quot;$1&quot;</span>); <span class="comment">/* \\1 用于声明组号 */</span></code></pre>
+</details>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java异常</title>
+    <url>/2026/02/16/Java%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<h1 id="java-异常体系"><a class="markdownIt-Anchor" href="#java-异常体系"></a> Java 异常体系</h1>
+<ul class="tree">
+    <li>
+        <details open>
+            <summary>Java.lang.Throwable</summary>
+            <ul>
+                <li>
+                    <details open>
+                        <summary>Error</summary>
+                        <ul>
+                            <li>虚拟机错误 - VirtualMachineError</li>
+                            <li>内存溢出 - OutOfMemoryError</li>
+                            <li>线程死锁 - ThreadDeath</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details open>
+                        <summary>Exception</summary>
+                        <ul>
+                            <li>
+                                <details open>
+                                    <summary>RuntimeException</summary>
+                                    <ul>
+                                        <li>空指针异常 - NullPointerException</li>
+                                        <li>数组下标越界异常 - ArrayIndexOutOfBoundsException</li>
+                                        <li>算术异常 - ArithmeticException</li>
+                                        <li>类型转换异常 - ClassCastExcepption</li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li>IO 异常 - IOException</li>
+                            <li>SQL 异常 - SQLException</li>
+                            <li>...</li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </li>
+</ul>
+<span id="more"></span>
+<p><strong>错误（Error）：</strong> 无法被处理，属于严重问题。<br />
+<strong>异常（Exception）：</strong> 可以被处理</p>
+<ul>
+<li>运行时异常：<code>RuntimeException</code> 及其子类，运行时才会出现的异常。</li>
+<li>编译时异常：<code>Exception</code> 及其子类，必须在编译时处理，否则程序无法通过编译。</li>
+</ul>
+<h1 id="自定义异常"><a class="markdownIt-Anchor" href="#自定义异常"></a> 自定义异常</h1>
+<h2 id="运行时异常"><a class="markdownIt-Anchor" href="#运行时异常"></a> 运行时异常</h2>
+<p>定义一个异常类继承 <code>RuntimeException</code>，并重写构造器：</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">public</span> class 异常类 <span class="keyword">extends</span> <span class="title class_">RuntimeException</span> &#123;
+    <span class="keyword">public</span> 异常类() &#123;
+    &#125;
+    <span class="keyword">public</span> 异常类(String message) &#123;
+        <span class="built_in">super</span>(message);
+    &#125;
+&#125;</code></pre>
+</div>
+<p>通过 <code>throw new 异常类(...)</code> 来创建异常对象并抛出。</p>
+<h2 id="编译时异常"><a class="markdownIt-Anchor" href="#编译时异常"></a> 编译时异常</h2>
+<p>异常类改为继承 <code>Exception</code> 类，抛出异常的方法需要使用 <code>throws</code> 继续将编译时异常向上层抛出。</p>
+<h1 id="异常的处理"><a class="markdownIt-Anchor" href="#异常的处理"></a> 异常的处理</h1>
+<h2 id="抛出异常throws"><a class="markdownIt-Anchor" href="#抛出异常throws"></a> 抛出异常（throws）</h2>
+<div class="rbcode">
+<pre><code class="highlight java">方法 <span class="keyword">throws</span> 异常<span class="number">1</span>, 异常<span class="number">2</span>, 异常<span class="number">3</span>, ... &#123;
+    ...
+&#125;</code></pre>
+</div>
+<p>或直接</p>
+<div class="rbcode">
+<pre><code class="highlight java">方法 <span class="keyword">throws</span> Exception &#123;
+    ...
+&#125;</code></pre>
+</div>
+<h2 id="捕获异常trycatch"><a class="markdownIt-Anchor" href="#捕获异常trycatch"></a> 捕获异常（try…catch）</h2>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">try</span> &#123;
+    ...
+&#125; <span class="keyword">catch</span>(异常类型<span class="number">1</span> e) &#123;
+    ...
+&#125; <span class="keyword">catch</span>(异常类型<span class="number">2</span> e) &#123;
+    ...
+&#125;</code></pre>
+</div>
+<p>或直接</p>
+<div class="rbcode">
+<pre><code class="highlight java"><span class="keyword">try</span> &#123;
+    ...
+&#125; <span class="keyword">catch</span>(Exception e) &#123;
+    e.printStackTrace();
+&#125;</code></pre>
+</div>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Java</category>
       </categories>
       <tags>
         <tag>Java</tag>
